@@ -5,7 +5,7 @@ const {
   decodeToken,
 } = require("../utilities/authToken");
 const users = require("../models/usersModel");
-const {authSchema} = require("../utilities/validationSchema");
+const { authSchema } = require("../utilities/validationSchema");
 /**
  * @desc   Register user
  * @route  POST /api/v1/auth/register
