@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs");
 const {
   generateToken,
   verifyToken,
@@ -36,7 +37,7 @@ const login = async (req, res, next) => {
       (getuser && bcrypt.compareSync(req.body.password, getuser.password)) ||
       false;
     if (compare) {
-      const token = "Bearer " + getToken({ username: req.body.username });
+      const token = "Bearer " + generateToken({ username: req.body.username });
       res.status(200).json({ Token: token });
     } else {
       res.status(403).json({ message: "Invalid username/password." });

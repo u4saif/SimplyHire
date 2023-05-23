@@ -14,8 +14,7 @@ dotenv.config({path:'./configs/config.env'})
 connectDB();
 app.use(express.json());
 
-console.log(generateToken());
-app.use("/auth",authRoutes);
+app.use("/api/v1/auth",authRoutes);
 
 app.listen(PORT, () => {
   console.log(
