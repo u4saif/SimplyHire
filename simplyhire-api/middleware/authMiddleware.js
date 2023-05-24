@@ -1,7 +1,7 @@
 const { verifyToken } = require("../utilities/authToken");
 const ErrorResponse = require("../utilities/errorResponse");
 
-const authMiddleware = (req, re, next) => {
+exports.authMiddleware = (req, res, next) => {
   let token;
   if (
     req.headers.authorization &&
@@ -23,6 +23,3 @@ const authMiddleware = (req, re, next) => {
   }
 };
 
-module.exports = {
-  authMiddleware,
-};
