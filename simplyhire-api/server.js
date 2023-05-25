@@ -3,10 +3,7 @@ const colors = require("../simplyhire-api/utilities/consolColors");
 const dotenv = require("dotenv");
 const connectDB = require("../simplyhire-api/configs/dbConnection");
 const app = express();
-const { generateToken, verifyToken } = require("./utilities/authToken");
-const {
-  authMiddleware
-} = require("./middleware/authMiddleware");
+const { authMiddleware } = require("./middleware/authMiddleware");
 const PORT = process.env.PORT || 5000;
 const authRoutes = require("../simplyhire-api/routes/authRoute");
 const dashboardRoutes = require("../simplyhire-api/routes/dashboardRoute");
