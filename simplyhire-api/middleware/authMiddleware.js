@@ -19,6 +19,9 @@ exports.authMiddleware = (req, res, next) => {
       ? next()
       : next(new ErrorResponse("Not authorized to access this route", 401));
   } catch (error) {
+    if(error.name == "TokenExpiredError"){
+      return next(new ErrorResponse(error.message, 498));
+    }
     return next(new ErrorResponse("Not authorized to access this route", 401));
   }
 };

@@ -5,6 +5,7 @@ const {
   decodeToken,
 } = require("../utilities/authToken");
 const users = require("../models/usersModel");
+const ErrorResponse = require("../utilities/errorResponse");
 const { authSchema } = require("../utilities/validationSchema");
 /**
  * @desc   Register user
@@ -16,8 +17,10 @@ const register = async (req, res, next) => {
   try {
     const userData = await users(req.body);
     const result = await userData.save();
-    const token = "Bearer " + generateToken({ username: req.body.username });
-    res.status(201).json({ token });
+    const { token, refToken } = {
+      ...generateToken({ username: req.body.username }),
+    };
+    res.status(201).json({ token: "Bearer " + token, refToken });
   } catch (error) {
     if (error.isJoi == true) error.status = 422;
     next(error);
@@ -37,8 +40,10 @@ const login = async (req, res, next) => {
       (getuser && bcrypt.compareSync(req.body.password, getuser.password)) ||
       false;
     if (compare) {
-      const token = "Bearer " + generateToken({ username: req.body.username });
-      res.status(200).json({ Token: token });
+      const { token, refToken } = {
+        ...generateToken({ username: req.body.username }),
+      };
+      res.status(201).json({ token: "Bearer " + token, refToken });
     } else {
       res.status(403).json({ message: "Invalid username/password." });
     }
@@ -48,7 +53,31 @@ const login = async (req, res, next) => {
   }
 };
 
+/**
+ * @desc   Verify Refresh token and issue new access Token
+ * @route  POST /api/v1/auth/refresh
+ * @access Private
+ */
+
+const refreshToken = async (req, res, next) => {
+  const reftoken = req.body.refToken;
+  try {
+    const isValid = verifyToken(reftoken, true);
+    if (!isValid)
+      return next(
+        new ErrorResponse("Not authorized to access this route", 401)
+      );
+    const { token, refToken } = {
+      ...generateToken({ username: req.body.username }),
+    };
+    res.status(201).json({ token: "Bearer " + token, refToken });
+  } catch (error) {
+    return next(new ErrorResponse("Not authorized to access this route", 401));
+  }
+};
+
 module.exports = {
   login,
   register,
+  refreshToken,
 };
