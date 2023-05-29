@@ -6,9 +6,9 @@ const authSchema = Joi.object({
 });
 
 const authRegisterSchema = Joi.object({
-  name: Joi.string().required(),
   username: Joi.string().email().lowercase().required(),
   password: Joi.string().min(8).required(),
+  name: Joi.string().required(),
 });
 
 let dynamicData = Joi.object({
