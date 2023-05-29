@@ -1,1 +1,78 @@
-<p>login works!</p>
+<div class="register-photo">
+  <div class="form-container">
+    <div class="image-holder"></div>
+    <div class="formWrapper">
+      <form *ngIf="this.isLoginFormVisible" [formGroup]="loginForm">
+        <h2><strong>Login</strong> to your account.</h2>
+
+        <nz-input-group [nzSuffix]="postfixTemplateUser">
+          <input type="text" nzBreakpoint="lg" nz-input placeholder="Enter your username" formControlName="username" />
+        </nz-input-group>
+        <ng-template #postfixTemplateUser><span nz-icon nzType="user"></span></ng-template>
+
+        <nz-input-group [nzSuffix]="suffixTemplate">
+          <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="input password"
+            formControlName="userPassword" />
+        </nz-input-group>
+        <ng-template #suffixTemplate>
+          <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+            (click)="passwordVisible = !passwordVisible"></span>
+        </ng-template>
+        <div class="rememberContainer">
+          <span>
+            <input type="checkbox" formControlName="rememberUser"> Remember me.
+          </span> <a>Forgot Password ?</a>
+        </div>
+        <button style="width:100%;margin-bottom: 1em;" nz-button nzType="dashed" nzSize="large"
+          [disabled]="!loginForm.valid">Login
+          <span nz-icon nzType="login" nzTheme="outline"></span>
+        </button>
+      </form>
+
+      <form *ngIf="!this.isLoginFormVisible" [formGroup]="registerForm">
+        <h2><strong>Create</strong> your account.</h2>
+        <nz-input-group [nzSuffix]="postfixTemplateUser">
+          <input type="text" nzBreakpoint="lg" nz-input placeholder="Enter your name" formControlName="name" />
+        </nz-input-group>
+        <nz-input-group [nzSuffix]="postfixTemplateUser">
+          <input type="text" nzBreakpoint="lg" nz-input placeholder="Enter your Email" formControlName="username" />
+        </nz-input-group>
+        <ng-template #postfixTemplateUser><span nz-icon nzType="user"></span></ng-template>
+
+        <nz-input-group [nzSuffix]="suffixTemplate">
+          <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="Choose your password"
+            formControlName="userPassword" />
+        </nz-input-group>
+        <ng-template #suffixTemplate>
+          <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+            (click)="passwordVisible = !passwordVisible"></span>
+        </ng-template>
+
+        <nz-input-group [nzSuffix]="suffixEyeClosed">
+          <input [type]="'password'" nz-input placeholder="confirm password" formControlName="confirmPassword" />
+        </nz-input-group>
+        <ng-template #suffixEyeClosed>
+          <span nz-icon [nzType]="'eye-invisible'"></span>
+        </ng-template>
+         
+        <button style="width:100%;margin: 1em auto;" nz-button nzType="dashed" nzSize="large"
+          [disabled]="!registerForm.valid">Register
+          <span nz-icon nzType="user-add" nzTheme="outline"></span>
+        </button>
+      </form>
+
+      <div *ngIf="this.isLoginFormVisible" class="centerItem">
+        <p>Don't have account?</p>
+        <a (click)="toggleForm()">Sign Up</a>
+      </div>
+
+      <div *ngIf="!this.isLoginFormVisible" class="centerItem">
+        <p>Already have an account?</p>
+        <a (click)="toggleForm()"> Sign In</a>
+      </div>
+
+      {{loginForm.value | json}}
+      {{registerForm.value | json}}
+    </div>
+  </div>
+</div>
