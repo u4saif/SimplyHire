@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   password?: string;
   isLoginFormVisible:boolean = true;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private route:Router) {}
   loginForm: FormGroup = this.fb.group({
     username: ['',Validators.required],
     userPassword: ['',Validators.required],
@@ -29,5 +30,10 @@ export class LoginComponent implements OnInit {
 
   toggleForm(){
     this.isLoginFormVisible= !this.isLoginFormVisible;
+  }
+
+  login(){
+    console.log(this.loginForm.value);
+    this.route.navigate(["dashboard/home"]);
   }
 }

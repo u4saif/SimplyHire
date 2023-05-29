@@ -24,7 +24,7 @@
           </span> <a>Forgot Password ?</a>
         </div>
         <button style="width:100%;margin-bottom: 1em;" nz-button nzType="dashed" nzSize="large"
-          [disabled]="!loginForm.valid">Login
+          [disabled]="!loginForm.valid" (click)="login()">Login
           <span nz-icon nzType="login" nzTheme="outline"></span>
         </button>
       </form>
