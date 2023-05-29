@@ -8,7 +8,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { IconsProviderModule } from '../icons-provider.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-
+import { NzMessageModule } from 'ng-zorro-antd/message';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -21,7 +21,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     ReactiveFormsModule,
     IconsProviderModule,
     NzInputModule,
-    NzButtonModule
+    NzButtonModule,
+    NzMessageModule
   ]
 })
 export class AuthModule { }
