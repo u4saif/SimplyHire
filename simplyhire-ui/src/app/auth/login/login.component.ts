@@ -1,3 +1,4 @@
+import { StorageService } from './../../services/auth/storage/storage.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private route: Router,
     private auth: AuthService,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private StorageService:StorageService
   ) {}
   loginForm: FormGroup = this.fb.group({
     username: ['', Validators.required],
@@ -33,7 +35,9 @@ export class LoginComponent implements OnInit {
     confirmPassword: ['', Validators.required],
   });
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(this.StorageService.getToken('authToken')) this.route.navigate(['dashboard/home']);
+  }
 
   toggleForm() {
     this.isLoginFormVisible = !this.isLoginFormVisible;
@@ -42,7 +46,8 @@ export class LoginComponent implements OnInit {
   login() {
     const { username, password } = this.loginForm.value;
     this.auth.userLogin('auth/login', { username, password }).subscribe(
-      (response) => {
+      (response:any) => {
+        this.StorageService.setToken('authToken',response['token']);
         this.message.create('success', `Logged In successfully`);
         this.route.navigate(['dashboard/home']);
       },
