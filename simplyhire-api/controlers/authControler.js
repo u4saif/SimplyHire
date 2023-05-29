@@ -6,7 +6,7 @@ const {
 } = require("../utilities/authToken");
 const users = require("../models/usersModel");
 const ErrorResponse = require("../utilities/errorResponse");
-const { authSchema } = require("../utilities/validationSchema");
+const { authSchema, authRegisterSchema } = require("../utilities/validationSchema");
 /**
  * @desc   Register user
  * @route  POST /api/v1/auth/register
@@ -15,6 +15,7 @@ const { authSchema } = require("../utilities/validationSchema");
 
 const register = async (req, res, next) => {
   try {
+    const validInput = await authRegisterSchema.validateAsync(req.body);
     const userData = await users(req.body);
     const result = await userData.save();
     const { token, refToken } = {

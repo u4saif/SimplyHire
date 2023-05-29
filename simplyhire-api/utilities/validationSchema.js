@@ -5,6 +5,12 @@ const authSchema = Joi.object({
   password: Joi.string().min(8).required(),
 });
 
+const authRegisterSchema = Joi.object({
+  name: Joi.string().required(),
+  username: Joi.string().email().lowercase().required(),
+  password: Joi.string().min(8).required(),
+});
+
 let dynamicData = Joi.object({
   title: Joi.string().required(),
   technology: Joi.string(),
@@ -22,4 +28,5 @@ const interviewSchema = Joi.object({
 module.exports = {
   authSchema,
   interviewSchema,
+  authRegisterSchema
 };

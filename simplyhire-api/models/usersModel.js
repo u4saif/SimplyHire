@@ -8,6 +8,7 @@ const users = new Schema({
     required: [true, "please provide username"],
     unique: true,
   },
+  name:{type:String},
   password: { type: String, required: [true, "please provide password"] },
 });
 

@@ -41,7 +41,7 @@
 
         <nz-input-group [nzSuffix]="suffixTemplate">
           <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="Choose your password"
-            formControlName="userPassword" />
+            formControlName="password" />
         </nz-input-group>
         <ng-template #suffixTemplate>
           <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
@@ -56,7 +56,7 @@
         </ng-template>
          
         <button style="width:100%;margin: 1em auto;" nz-button nzType="dashed" nzSize="large"
-          [disabled]="!registerForm.valid">Register
+          [disabled]="!registerForm.valid" (click)="register()">Register
           <span nz-icon nzType="user-add" nzTheme="outline"></span>
         </button>
       </form>
