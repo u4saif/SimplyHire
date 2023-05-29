@@ -11,8 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsProviderModule } from './icons-provider.module';
-import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
+
+import { NgZorroComponentProviderModule } from './ng-zorro-component-provider.module';
 
 registerLocaleData(en);
 
@@ -27,8 +27,7 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     IconsProviderModule,
-    NzLayoutModule,
-    NzMenuModule
+    NgZorroComponentProviderModule
   ],
   exports: [
     BrowserModule,
@@ -37,8 +36,7 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     IconsProviderModule,
-    NzLayoutModule,
-    NzMenuModule
+    NgZorroComponentProviderModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
-import { NzInputModule } from 'ng-zorro-antd/input';
+
 import { IconsProviderModule } from '../icons-provider.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzMessageModule } from 'ng-zorro-antd/message';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgZorroComponentProviderModule } from '../ng-zorro-component-provider.module';
+
 @NgModule({
   declarations: [
     LoginComponent
@@ -15,12 +15,9 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    FormsModule,
     ReactiveFormsModule,
     IconsProviderModule,
-    NzInputModule,
-    NzButtonModule,
-    NzMessageModule
+    NgZorroComponentProviderModule
   ]
 })
 export class AuthModule { }
