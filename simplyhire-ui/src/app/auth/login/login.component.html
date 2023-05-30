@@ -5,9 +5,12 @@
       <form *ngIf="this.isLoginFormVisible" [formGroup]="loginForm">
         <h2><strong>Login</strong> to your account.</h2>
 
-        <nz-input-group [nzSuffix]="postfixTemplateUser">
+        <nz-input-group [nzSuffix]="postfixTemplateUser"
+          [ngClass]="{'invalid-Input' : username.touched && username.errors }">
           <input type="text" nzBreakpoint="lg" nz-input placeholder="Enter your username" formControlName="username" />
         </nz-input-group>
+        <span nz-typography nzType="danger"
+          *ngIf="username.errors && username.touched && username.errors['email']">invalid email</span>
         <ng-template #postfixTemplateUser><span nz-icon nzType="user"></span></ng-template>
 
         <nz-input-group [nzSuffix]="suffixTemplate">
@@ -24,8 +27,9 @@
           </span> <a>Forgot Password ?</a>
         </div>
         <button style="width:100%;margin-bottom: 1em;" nz-button nzType="dashed" nzSize="large"
-          [disabled]="!loginForm.valid" (click)="login()">Login
-          <span nz-icon nzType="login" nzTheme="outline"></span>
+          [disabled]="!loginForm.valid || isFormLoading" (click)="login()">Login
+          <span *ngIf="!isFormLoading" nz-icon nzType="login" nzTheme="outline"></span>
+          <span *ngIf="isFormLoading" nz-icon nzType="loading" nzTheme="outline"></span>
         </button>
       </form>
 
@@ -54,7 +58,7 @@
         <ng-template #suffixEyeClosed>
           <span nz-icon [nzType]="'eye-invisible'"></span>
         </ng-template>
-         
+
         <button style="width:100%;margin: 1em auto;" nz-button nzType="dashed" nzSize="large"
           [disabled]="!registerForm.valid" (click)="register()">Register
           <span nz-icon nzType="user-add" nzTheme="outline"></span>
@@ -70,9 +74,6 @@
         <p>Already have an account?</p>
         <a (click)="toggleForm()"> Sign In</a>
       </div>
-
-      {{loginForm.value | json}}
-      {{registerForm.value | json}}
     </div>
   </div>
 </div>

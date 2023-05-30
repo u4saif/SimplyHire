@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   passwordVisible = false;
   password?: string;
   isLoginFormVisible: boolean = true;
+  isFormLoading:boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
     private StorageService: StorageService
   ) {}
   loginForm: FormGroup = this.fb.group({
-    username: ['', Validators.required],
+    username: ['', [Validators.required,Validators.email]],
     password: ['', Validators.required],
     rememberUser: false,
   });
@@ -49,14 +50,17 @@ export class LoginComponent implements OnInit {
    */
   login() {
     const { username, password } = this.loginForm.value;
+    this.isFormLoading=true;
     this.auth.userLogin('auth/login', { username, password }).subscribe(
       (response: any) => {
+        this.isFormLoading=false;
         this.StorageService.setToken('authToken', response['token']);
         this.StorageService.setToken('refToken', response['token']);
         this.message.create('success', `Logged In successfully`);
         this.route.navigate(['dashboard/home']);
       },
       (error) => {
+        this.isFormLoading=false;
         this.message.create(
           'error',
           `Unable to login. ${error?.error?.error || error?.error?.message}`
@@ -85,5 +89,9 @@ export class LoginComponent implements OnInit {
         );
       }
     );
+  }
+
+  get username(){
+    return this.loginForm.controls['username']
   }
 }
