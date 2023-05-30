@@ -12,4 +12,9 @@ export class AuthService {
     const url = Constants.BASE_URL + URL;
     return this.http.post(url, formData);
   }
+
+  getData(){
+    const url = Constants.BASE_URL + 'dashboard/interviews';
+    return this.http.get(url);
+  }
 }
