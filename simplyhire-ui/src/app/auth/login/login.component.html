@@ -33,14 +33,19 @@
         </button>
       </form>
 
+      <!-- Registeration Form  -->
+
       <form *ngIf="!this.isLoginFormVisible" [formGroup]="registerForm">
         <h2><strong>Create</strong> your account.</h2>
         <nz-input-group [nzSuffix]="postfixTemplateUser">
           <input type="text" nzBreakpoint="lg" nz-input placeholder="Enter your name" formControlName="name" />
         </nz-input-group>
-        <nz-input-group [nzSuffix]="postfixTemplateUser">
+        <nz-input-group [nzSuffix]="postfixTemplateUser"
+        [ngClass]="{'invalid-Input' : username2.touched && username2.errors }">
           <input type="text" nzBreakpoint="lg" nz-input placeholder="Enter your Email" formControlName="username" />
         </nz-input-group>
+        <span nz-typography nzType="danger"
+          *ngIf="username2.errors && username2.touched && username2.errors['email']">Invalid Email</span>
         <ng-template #postfixTemplateUser><span nz-icon nzType="user"></span></ng-template>
 
         <nz-input-group [nzSuffix]="suffixTemplate">
