@@ -16,7 +16,7 @@ const {
  * COnfigure CORSS
  */
 app.use(cors({
-    origin: ['http://localhost:4200']
+    origin: ['http://localhost:4200','http://localhost:3000']
 }));
 
 /**

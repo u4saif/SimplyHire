@@ -12,4 +12,8 @@ export class StorageService {
   getToken(key: string) {
     return localStorage.getItem(key);
   }
+
+  logOut(key: string){
+    localStorage.removeItem(key);
+  }
 }
