@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  isCollapsed = false;
   constructor(private authService:AuthService) { }
 
   ngOnInit(): void {
