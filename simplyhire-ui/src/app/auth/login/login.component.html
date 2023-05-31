@@ -57,12 +57,22 @@
             (click)="passwordVisible = !passwordVisible"></span>
         </ng-template>
 
-        <nz-input-group [nzSuffix]="suffixEyeClosed">
+        <!-- <nz-input-group [nzSuffix]="suffixEyeClosed">
           <input [type]="'password'" nz-input placeholder="confirm password" formControlName="confirmPassword" />
         </nz-input-group>
         <ng-template #suffixEyeClosed>
           <span nz-icon [nzType]="'eye-invisible'"></span>
-        </ng-template>
+        </ng-template> -->
+
+        <nz-form-item>
+          <nz-form-control nzValidatingTip>
+            <nz-input-group nzSuffixIcon="lock">
+            <input type="password" nz-input formControlName="confirmPassword" placeholder="Confirm password" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <p nz-typography nzType="danger"
+        *ngIf="registerForm.errors && registerForm.errors['valueNotMached']">Password doesn't matched!</p>
 
         <button style="width:100%;margin: 1em auto;" nz-button nzType="dashed" nzSize="large"
           [disabled]="!registerForm.valid" (click)="register()">Register
@@ -79,6 +89,7 @@
         <p>Already have an account?</p>
         <a (click)="toggleForm()"> Sign In</a>
       </div>
+      {{registerForm.errors | json}}
     </div>
   </div>
 </div>

@@ -9,6 +9,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzFormModule } from 'ng-zorro-antd/form';
 @NgModule({
   declarations: [],
   imports: [
@@ -21,7 +22,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzAvatarModule,
     NzDropDownModule,
     NzCardModule,
-    NzTypographyModule
+    NzTypographyModule,
+    NzFormModule
   ],
   exports: [
     CommonModule,
@@ -33,7 +35,8 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzAvatarModule,
     NzDropDownModule,
     NzCardModule,
-    NzTypographyModule
+    NzTypographyModule,
+    NzFormModule
   ]
 })
 export class NgZorroComponentProviderModule { }

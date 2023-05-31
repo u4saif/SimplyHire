@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { Matchfield } from 'src/app/utils/syncValidators/mach-fields';
 
 @Component({
   selector: 'app-login',
@@ -29,17 +30,22 @@ export class LoginComponent implements OnInit {
     rememberUser: false,
   });
 
-  registerForm: FormGroup = this.fb.group({
-    name: ['', Validators.required],
-    username: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
-    confirmPassword: [
-      '',
-      {
-        validators: [Validators.required, Validators.minLength(8)],
-      },
-    ],
-  });
+  registerForm: FormGroup = this.fb.group(
+    {
+      name: ['', Validators.required],
+      username: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: [
+        '',
+        {
+          validators: [Validators.required, Validators.minLength(8)],
+        },
+      ],
+    },
+    {
+      validator: [Matchfield('password','confirmPassword')],
+    }
+  );
 
   ngOnInit(): void {
     //if (this.StorageService.getToken('authToken'))
