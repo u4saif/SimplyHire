@@ -77,8 +77,28 @@ const refreshToken = async (req, res, next) => {
   }
 };
 
+/**
+ * @desc   Verify Unique User
+ * @route  GET /api/v1/auth/refresh/:check?username
+ * @access Private
+ */
+
+const uniqueUser = async (req, resp, next) => {
+  try {
+    const getuser = await users.findOne({ username: req.query.username });
+    if (!getuser) {
+      resp.status(200).json({ usernameExist: false });
+    } else {
+      resp.status(200).json({ usernameExist: true });
+    }
+  } catch (error) {
+    return next(new ErrorResponse("Bad request", 402));
+  }
+};
+
 module.exports = {
   login,
   register,
   refreshToken,
+  uniqueUser
 };

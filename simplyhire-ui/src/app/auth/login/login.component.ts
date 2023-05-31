@@ -4,7 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Matchfield } from 'src/app/utils/syncValidators/mach-fields';
+import { UniqueUsername } from 'src/app/utils/asyncValidators/unique-usernmae.validator';
+import { Matchfield } from 'src/app/utils/syncValidators/mach-fields.validator';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +34,11 @@ export class LoginComponent implements OnInit {
   registerForm: FormGroup = this.fb.group(
     {
       name: ['', Validators.required],
-      username: ['', [Validators.required, Validators.email]],
+      username: ['', {
+        validators:[Validators.required, Validators.email],
+        asyncValidators:[UniqueUsername(this.auth)],
+        // updateOn: 'blur'
+    }],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: [
         '',

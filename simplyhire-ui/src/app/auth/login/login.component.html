@@ -46,7 +46,9 @@
         </nz-input-group>
         <span nz-typography nzType="danger"
           *ngIf="registerUsername.errors && registerUsername.touched && registerUsername.errors['email']">Invalid Email</span>
-        <ng-template #postfixTemplateUser><span nz-icon nzType="user"></span></ng-template>
+          <span nz-typography nzType="danger"
+          *ngIf="registerUsername.errors && registerUsername.touched && registerUsername.errors['usernameExist']">Already registered Email!</span>
+          <ng-template #postfixTemplateUser><span nz-icon nzType="user"></span></ng-template>
 
         <nz-input-group [nzSuffix]="suffixTemplate">
           <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="Choose your password"

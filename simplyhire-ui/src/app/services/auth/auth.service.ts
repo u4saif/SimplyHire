@@ -17,4 +17,9 @@ export class AuthService {
     const url = Constants.BASE_URL + 'dashboard/interviews';
     return this.http.get(url);
   }
+
+  checkUnique(value:string){
+    const url = Constants.BASE_URL + `auth/register/check?username=${value}`;
+    return this.http.get(url);
+  }
 }
