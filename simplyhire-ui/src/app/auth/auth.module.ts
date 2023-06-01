@@ -7,10 +7,12 @@ import { LoginComponent } from './login/login.component';
 import { IconsProviderModule } from '../icons-provider.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgZorroComponentProviderModule } from '../ng-zorro-component-provider.module';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,
