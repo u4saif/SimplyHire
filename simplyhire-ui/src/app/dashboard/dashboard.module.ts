@@ -5,11 +5,15 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { HomeComponent } from './home/home.component';
 import { NgZorroComponentProviderModule } from '../ng-zorro-component-provider.module';
 import { IconsProviderModule } from '../icons-provider.module';
+import { InterviewformComponent } from './interviewform/interviewform.component';
+import { ContainerComponent } from './container/container.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    InterviewformComponent,
+    ContainerComponent
   ],
   imports: [
     CommonModule,

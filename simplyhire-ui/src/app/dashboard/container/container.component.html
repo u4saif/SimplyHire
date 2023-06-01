@@ -1,0 +1,65 @@
+<nz-layout class="app-layout">
+    <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [nzCollapsedWidth]="0"
+      [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+      <div class="sidebar-logo">
+        <a href="" target="_blank">
+          <img src="../../../assets/images/logo.png" alt="logo">
+          <h1>SimplyHire</h1>
+        </a>
+      </div>
+      <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+        <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/dashboard/home">My Dashboard</a>
+            </li>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/login">My Referrals</a>
+            </li>
+          </ul>
+        </li>
+        <li nz-submenu nzOpen nzTitle="Add Interview" nzIcon="form">
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/dashboard/schedule">Schedule Interview</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+  
+    <nz-layout>
+      <nz-header>
+        <div class="app-header">
+          <span class="manuIconContainer">
+            <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+              <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
+            </span>
+          </span>
+  
+          <span class="profileContainer">
+  
+            <button nz-button nzType="primary" nzSize="large" nzShape="round">
+              <span nz-icon nzType="share-alt" nzTheme="outline"></span>
+              Referral Someone
+            </button>
+            
+            <button nz-button nz-dropdown nzType="text" [nzDropdownMenu]="menu2" nzPlacement="bottomRight">
+              <nz-avatar style="background-color: #1890ff" nzIcon="user"></nz-avatar>
+            </button>
+            
+            
+            <nz-dropdown-menu #menu2="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item>Settings</li>
+                <li nz-menu-item (click)="logOut()">Logout</li>
+              </ul>
+            </nz-dropdown-menu>
+          </span>
+        </div>
+      </nz-header>
+      <nz-content>
+            <router-outlet></router-outlet>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
