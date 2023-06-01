@@ -31,27 +31,31 @@
   <nz-layout>
     <nz-header>
       <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
+        <span class="manuIconContainer">
+          <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+            <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
+          </span>
         </span>
 
-        <button nz-button nzType="primary" nzSize="large" nzShape="round">
-          <span nz-icon nzType="share-alt" nzTheme="outline"></span>
-          Referral Someone
-        </button>
+        <span class="profileContainer">
 
-        <button nz-button nz-dropdown nzType="text" [nzDropdownMenu]="menu2" nzPlacement="bottomRight">
-          <nz-avatar style="background-color: #1890ff" nzIcon="user"></nz-avatar>
-        </button>
-
-
-        <nz-dropdown-menu #menu2="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item>Settings</li>
-            <li nz-menu-item (click)="logOut()">Logout</li>
-            <li nz-menu-item>menu2 3rd menu item</li>
-          </ul>
-        </nz-dropdown-menu>
+          <button nz-button nzType="primary" nzSize="large" nzShape="round">
+            <span nz-icon nzType="share-alt" nzTheme="outline"></span>
+            Referral Someone
+          </button>
+          
+          <button nz-button nz-dropdown nzType="text" [nzDropdownMenu]="menu2" nzPlacement="bottomRight">
+            <nz-avatar style="background-color: #1890ff" nzIcon="user"></nz-avatar>
+          </button>
+          
+          
+          <nz-dropdown-menu #menu2="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item>Settings</li>
+              <li nz-menu-item (click)="logOut()">Logout</li>
+            </ul>
+          </nz-dropdown-menu>
+        </span>
       </div>
     </nz-header>
 
@@ -66,7 +70,6 @@
           <p>Card content</p>
           <p>Card content</p>
           <p>Card content</p>
- 
         </nz-card>
       </div>
       <ng-template #extraTemplate>
