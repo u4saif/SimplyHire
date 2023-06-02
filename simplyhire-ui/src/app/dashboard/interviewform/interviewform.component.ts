@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-interviewform',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./interviewform.component.less']
 })
 export class InterviewformComponent implements OnInit {
+  validateForm: any;
 
-  constructor() { }
+  constructor(private fb: UntypedFormBuilder) { }
 
   ngOnInit(): void {
+    this.validateForm = this.fb.group({
+      userName: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      remember: [true]
+    });
   }
-
+  submitForm(): void {
+    console.log('submit', this.validateForm.value);
+  }
 }

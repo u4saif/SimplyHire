@@ -24,8 +24,4 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  logOut() {
-    this.storageService.logOut('authToken');
-    this.route.navigate(['/']);
-  }
 }

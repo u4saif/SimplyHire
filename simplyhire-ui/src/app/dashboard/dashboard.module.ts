@@ -7,6 +7,7 @@ import { NgZorroComponentProviderModule } from '../ng-zorro-component-provider.m
 import { IconsProviderModule } from '../icons-provider.module';
 import { InterviewformComponent } from './interviewform/interviewform.component';
 import { ContainerComponent } from './container/container.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { ContainerComponent } from './container/container.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     DashboardRoutingModule,
     IconsProviderModule,
     NgZorroComponentProviderModule
