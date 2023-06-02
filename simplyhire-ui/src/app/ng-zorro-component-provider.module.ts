@@ -10,6 +10,12 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -23,7 +29,12 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     NzDropDownModule,
     NzCardModule,
     NzTypographyModule,
-    NzFormModule
+    NzFormModule,
+    NzUploadModule,
+    NzInputNumberModule,
+    NzSelectModule,
+    NzTimePickerModule,
+    NzDatePickerModule
   ],
   exports: [
     CommonModule,
@@ -36,7 +47,12 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     NzDropDownModule,
     NzCardModule,
     NzTypographyModule,
-    NzFormModule
+    NzFormModule,
+    NzUploadModule,
+    NzInputNumberModule,
+    NzSelectModule,
+    NzTimePickerModule,
+    NzDatePickerModule
   ]
 })
 export class NgZorroComponentProviderModule { }

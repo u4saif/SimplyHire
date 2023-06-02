@@ -1,4 +1,114 @@
-<form>
-    <h2  class="textHeading">Schedule an interview</h2>
+<h2 nz-typography class="textHeading">Schedule an interview</h2>
+<nz-content>
+    <form nz-form>
 
-</form>
+        <nz-form-item>
+            <nz-form-label nzRequired [nzSm]="3" nzFor="email">Name</nz-form-label>
+            <nz-form-control>
+                <input nz-input name="email" type="email" id="email">
+            </nz-form-control>
+
+            <nz-form-label [nzSm]="3" nzRequired nzFor="email">E-mail</nz-form-label>
+            <nz-form-control>
+                <input nz-input name="email" type="email" id="email">
+            </nz-form-control>
+        </nz-form-item>
+
+
+        <nz-form-item>
+            <nz-form-label nzRequired [nzSm]="3" nzFor="mobile">Mobile No.</nz-form-label>
+            <nz-form-control>
+                <nz-input-group nzCompact>
+                    <input type="text" nz-input placeholder="+91" style="width: 20%;" disabled />
+                    <input type="number" nz-input placeholder="number" id="mobile" style="width:80%;" />
+                </nz-input-group>
+            </nz-form-control>
+
+            <nz-form-label [nzSm]="3" nzFor="alternateMobile">Alternative no</nz-form-label>
+            <nz-form-control>
+                <nz-input-group nzCompact>
+                    <input type="text" nz-input placeholder="+91" style="width: 20%;" disabled />
+                    <input type="number" nz-input placeholder="number" id="alternateMobile" style="width:80%;" />
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+
+        <!------------------------------------------->
+
+
+        <nz-form-item>
+            <nz-form-label nzRequired  [nzSm]="3" nzFor="interviewDate"> Timming</nz-form-label>
+            <nz-form-control>
+                <nz-date-picker nzFormat='dd/MM/yyyy' nzSize="large"></nz-date-picker> 
+                <nz-time-picker [nzUse12Hours]="true" nzFormat="h:mm a"  nzSize="large"></nz-time-picker>
+            </nz-form-control>
+
+            <nz-form-label [nzSm]="3" nzRequired nzFor="qualification">Qualification</nz-form-label>
+            <nz-form-control>
+                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person">
+                    <ng-container *ngFor="let option of qualificationOptions">
+                        <nz-option nzLabel="{{option.value}}" nzValue="{{option.key}}"></nz-option>
+                    </ng-container>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+
+        <!------------------------------------------->
+        <nz-form-item>
+           
+            <nz-form-label nzRequired [nzSm]="3" nzFor="skills">SKils</nz-form-label>
+            <nz-form-control>
+                <nz-select name="skills" nzMode="tags" nzPlaceHolder="Skills">
+                    <nz-option *ngFor="let option of listOfSkillsOption" [nzLabel]="option.label"
+                        [nzValue]="option.value"></nz-option>
+                </nz-select>
+            </nz-form-control>
+            
+            <nz-form-label nzRequired [nzSm]="3" nzFor="interviewDate">Resume</nz-form-label>
+            <nz-form-control>
+                <nz-upload
+                nzType="drag"
+                [nzMultiple]="true"
+                nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                (nzChange)="handleChange($event)"
+              >
+                <p class="ant-upload-drag-icon">
+                  <span nz-icon nzType="inbox"></span>
+                </p>
+                <p class="ant-upload-text">Click or drag file to this area to upload</p>
+              </nz-upload>
+            </nz-form-control>
+        </nz-form-item>
+
+        <!-- ----------------------------------------->
+        <h2>Job Discription</h2>
+
+        <nz-form-item>
+            <nz-form-label nzRequired [nzSm]="3">Purpouse</nz-form-label>
+            <nz-form-control>
+                <nz-textarea-count [nzMaxCharacterCount]="100">
+                    <textarea rows="4" nz-input></textarea>
+                </nz-textarea-count>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label nzRequired [nzSm]="3">Roles &<br/> Responsibilities</nz-form-label>
+            <nz-form-control>
+                <nz-textarea-count [nzMaxCharacterCount]="1000">
+                    <textarea rows="4" nz-input></textarea>
+                </nz-textarea-count>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label nzRequired [nzSm]="3">Required <br/>Key Skills </nz-form-label>
+            <nz-form-control>
+                <nz-textarea-count [nzMaxCharacterCount]="500">
+                    <textarea rows="3" nz-input></textarea>
+                </nz-textarea-count>
+            </nz-form-control>
+        </nz-form-item>
+
+    </form>
+</nz-content>
