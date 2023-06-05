@@ -1,10 +1,10 @@
 <div class="headerContainer">
     <h2 nz-typography>Schedule an interview
     </h2>
-    <button nz-button nzType="dashed" nzSize="large" [disabled]="!interviewForm.valid">Create</button>
+    <button nz-button nzType="dashed" nzSize="large" [disabled]="!dynamicForm.valid">Create</button>
 </div>
 <nz-content>
-    <form nz-form [formGroup]="interviewForm">
+    <form nz-form [formGroup]="dynamicForm">
 
         <nz-form-item formGroupName="basicDeails">
             <nz-form-label nzRequired [nzSm]="3" nzFor="email">Name</nz-form-label>
@@ -115,6 +115,6 @@
         </nz-form-item>
     </form>
 
-    {{interviewForm.value | json}}
-    {{interviewForm.valid | json}}
+    {{dynamicForm.value | json}}
+    {{dynamicForm.valid | json}}
 </nz-content>

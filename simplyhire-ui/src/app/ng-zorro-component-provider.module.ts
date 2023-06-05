@@ -15,6 +15,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @NgModule({
   declarations: [],
@@ -34,7 +35,8 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NzInputNumberModule,
     NzSelectModule,
     NzTimePickerModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzModalModule
   ],
   exports: [
     CommonModule,
@@ -52,7 +54,8 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NzInputNumberModule,
     NzSelectModule,
     NzTimePickerModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzModalModule
   ]
 })
 export class NgZorroComponentProviderModule { }

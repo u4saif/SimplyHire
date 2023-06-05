@@ -32,7 +32,7 @@ export class InterviewformComponent implements OnInit {
     { value: 'bcom8', label: 'B Comm8' },
   ];
   //interviewForm Initialization;
-  interviewForm = this.fb.group({
+  dynamicForm = this.fb.group({
     basicDeails: this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -81,7 +81,7 @@ export class InterviewformComponent implements OnInit {
   ngOnInit() {}
   submitForm(): void {}
   handleChange(value: any) {
-    this.interviewForm.controls['basicDeails'].controls['resume'].setValue(
+    this.dynamicForm.controls['basicDeails'].controls['resume'].setValue(
       'valaa'
     );
   }
