@@ -18,15 +18,27 @@ let dynamicData = Joi.object({
 });
 
 const interviewSchema = Joi.object({
-  candidateName: Joi.string().required(),
-  interviewerName: Joi.string().default("not available"),
-  interviewerUsername: Joi.string().default("not available"),
-  data: Joi.array().items(dynamicData).has(Joi.object().keys()),
-  ovelAllScore: Joi.number(),
+  basicDeails: Joi.object({
+    name: Joi.string().required(),
+    email: Joi.string().email().lowercase().required(),
+    mobile: Joi.string().required(),
+    otherNumber: Joi.string().allow(""),
+    interviewDate: Joi.string().required(),
+    qualification: Joi.string().required(),
+    skills: Joi.array().min(1),
+    resume: Joi.string().required(),
+  }),
+  jobDiscription: Joi.object({
+    purpouse: Joi.string().required(),
+    roleResponsiblity: Joi.string().required(),
+  }),
+  interviewPanel: Joi.object({
+    panelistName: Joi.array().min(1),
+  }),
 });
 
 module.exports = {
   authSchema,
   interviewSchema,
-  authRegisterSchema
+  authRegisterSchema,
 };

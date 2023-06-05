@@ -19,7 +19,7 @@ const home = (req, res, next) => {
 const addNew = async (req, res, next) => {
   try {
     const data = req.body;
-    const validateShema = await interviewSchema.validateAsync(data);
+     const validateShema = await interviewSchema.validateAsync(data);
     const added = await interviewData.insertMany(data);
     res.status(200).json({ addInterview: added });
   } catch (error) {

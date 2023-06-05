@@ -2,20 +2,38 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const interviewData = new Schema({
-  candidateName: {
-    type: String,
-    required: [true, "please provide candidate Name"],
-  },
-  interviewerName: { type: String, default: "not available" },
-  interviewerUsername: { type: String, default: "not available" },
-  data: [
-    {
-      title: { type: String },
-      technology: { type: String },
-      score: { type: Number },
+  basicDeails: {
+    name: { type: String, required: [true, "please provide candidate Name"] },
+    email: { type: String, required: [true, "please provide email"] },
+    mobile: { type: String, required: [true, "please provide mobile number"] },
+    otherNumber: { type: String, required: false },
+    interviewDate: {
+      type: String,
+      required: [true, "please provide date time"],
     },
-  ],
-  ovelAllScore: { type: Number , default : null},
+    qualification: {
+      type: String,
+      required: [true, "please provide qualification"],
+    },
+    skills: {
+      type: Array,
+      required: [true, "please provide candidate skills"],
+    },
+    resume: { type: String, required: [true, "please provide resume"] },
+  },
+  jobDiscription: {
+    purpouse: { type: String, required: [true, "please provide purpouse"] },
+    roleResponsiblity: {
+      type: String,
+      required: [true, "please provide purpouse"],
+    },
+  },
+  interviewPanel: {
+    panelistName: {
+      type: Array,
+      require: [true, "please provide at least one panelist name"],
+    },
+  },
 });
 
 module.exports = mongoose.model("interviewData", interviewData);

@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
+import { InterviewService } from 'src/app/services/dashboard/interview.service';
 
 @Component({
   selector: 'app-interviewform',
@@ -54,7 +55,7 @@ export class InterviewformComponent implements OnInit {
       panelistName: [null, Validators.required],
     }),
   });
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private interviewService : InterviewService) {}
 
   beforeUpload = (
     file: NzUploadFile,
@@ -79,7 +80,11 @@ export class InterviewformComponent implements OnInit {
     });
 
   ngOnInit() {}
-  submitForm(): void {}
+  submitForm(): void {
+    this.interviewService.submitForm(this.dynamicForm.value,'dashboard/addnew').subscribe((resp)=>{
+      console.log("Submitted");
+    })
+  }
   handleChange(value: any) {
     this.dynamicForm.controls['basicDeails'].controls['resume'].setValue(
       'valaa'
