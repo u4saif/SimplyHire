@@ -1,26 +1,31 @@
-<h2 nz-typography class="textHeading">Schedule an interview</h2>
+<div class="headerContainer">
+    <h2 nz-typography>Schedule an interview
+    </h2>
+    <button nz-button nzType="dashed" nzSize="large" [disabled]="!interviewForm.valid">Create</button>
+</div>
 <nz-content>
-    <form nz-form>
+    <form nz-form [formGroup]="interviewForm">
 
-        <nz-form-item>
+        <nz-form-item formGroupName="basicDeails">
             <nz-form-label nzRequired [nzSm]="3" nzFor="email">Name</nz-form-label>
             <nz-form-control>
-                <input nz-input name="email" type="email" id="email">
+                <input nz-input name="name" type="text" formControlName="name">
             </nz-form-control>
 
             <nz-form-label [nzSm]="3" nzRequired nzFor="email">E-mail</nz-form-label>
             <nz-form-control>
-                <input nz-input name="email" type="email" id="email">
+                <input nz-input name="email" type="email" formControlName="email">
             </nz-form-control>
         </nz-form-item>
 
 
-        <nz-form-item>
+        <nz-form-item formGroupName="basicDeails">
             <nz-form-label nzRequired [nzSm]="3" nzFor="mobile">Mobile No.</nz-form-label>
             <nz-form-control>
                 <nz-input-group nzCompact>
                     <input type="text" nz-input placeholder="+91" style="width: 20%;" disabled />
-                    <input type="number" nz-input placeholder="number" id="mobile" style="width:80%;" />
+                    <input type="tel" maxlength="10" nz-input placeholder="Mobile number" style="width:80%;" name="mobile"
+                        formControlName="mobile" />
                 </nz-input-group>
             </nz-form-control>
 
@@ -28,24 +33,24 @@
             <nz-form-control>
                 <nz-input-group nzCompact>
                     <input type="text" nz-input placeholder="+91" style="width: 20%;" disabled />
-                    <input type="number" nz-input placeholder="number" id="alternateMobile" style="width:80%;" />
+                    <input type="tel" maxlength="10" nz-input placeholder="Alternate number" style="width:80%;" name="otherNumber"
+                        formControlName="otherNumber" />
                 </nz-input-group>
             </nz-form-control>
         </nz-form-item>
 
         <!------------------------------------------->
 
-
-        <nz-form-item>
-            <nz-form-label nzRequired  [nzSm]="3" nzFor="interviewDate"> Timming</nz-form-label>
+        <nz-form-item formGroupName="basicDeails">
+            <nz-form-label nzRequired [nzSm]="3" nzFor="interviewDate"> Timming</nz-form-label>
             <nz-form-control>
-                <nz-date-picker nzFormat='dd/MM/yyyy' nzSize="large"></nz-date-picker> 
-                <nz-time-picker [nzUse12Hours]="true" nzFormat="h:mm a"  nzSize="large"></nz-time-picker>
+                <nz-date-picker nzShowTime nzFormat="dd/MM/yyyy h:mm a"
+                    formControlName="interviewDate"></nz-date-picker>
             </nz-form-control>
 
             <nz-form-label [nzSm]="3" nzRequired nzFor="qualification">Qualification</nz-form-label>
             <nz-form-control>
-                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person">
+                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a person" formControlName="qualification">
                     <ng-container *ngFor="let option of qualificationOptions">
                         <nz-option nzLabel="{{option.value}}" nzValue="{{option.key}}"></nz-option>
                     </ng-container>
@@ -54,61 +59,62 @@
         </nz-form-item>
 
         <!------------------------------------------->
-        <nz-form-item>
-           
-            <nz-form-label nzRequired [nzSm]="3" nzFor="skills">SKils</nz-form-label>
+        <nz-form-item formGroupName="basicDeails">
+
+            <nz-form-label nzRequired [nzSm]="3" nzFor="skills">Required Skils</nz-form-label>
             <nz-form-control>
-                <nz-select name="skills" nzMode="tags" nzPlaceHolder="Skills">
+                <nz-select name="skills" nzMode="tags" nzPlaceHolder="Skills" formControlName="skills">
                     <nz-option *ngFor="let option of listOfSkillsOption" [nzLabel]="option.label"
                         [nzValue]="option.value"></nz-option>
                 </nz-select>
             </nz-form-control>
-            
+
             <nz-form-label nzRequired [nzSm]="3" nzFor="interviewDate">Resume</nz-form-label>
             <nz-form-control>
-                <nz-upload
-                nzType="drag"
-                [nzMultiple]="true"
-                nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                (nzChange)="handleChange($event)"
-              >
-                <p class="ant-upload-drag-icon">
-                  <span nz-icon nzType="inbox"></span>
-                </p>
-                <p class="ant-upload-text">Click or drag file to this area to upload</p>
-              </nz-upload>
+                <nz-upload nzType="drag" [nzMultiple]="true" nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    (nzChange)="handleChange($event)">
+                    <p class="ant-upload-drag-icon">
+                        <span nz-icon nzType="inbox"></span>
+                    </p>
+                    <p class="ant-upload-text">Click or drag file to this area to upload</p>
+                </nz-upload>
             </nz-form-control>
         </nz-form-item>
 
         <!-- ----------------------------------------->
         <h2>Job Discription</h2>
 
-        <nz-form-item>
+        <nz-form-item formGroupName="jobDiscription">
             <nz-form-label nzRequired [nzSm]="3">Purpouse</nz-form-label>
             <nz-form-control>
-                <nz-textarea-count [nzMaxCharacterCount]="100">
-                    <textarea rows="4" nz-input></textarea>
+                <nz-textarea-count [nzMaxCharacterCount]="250">
+                    <textarea rows="4" nz-input formControlName="purpouse"></textarea>
                 </nz-textarea-count>
             </nz-form-control>
         </nz-form-item>
 
-        <nz-form-item>
-            <nz-form-label nzRequired [nzSm]="3">Roles &<br/> Responsibilities</nz-form-label>
+        <nz-form-item formGroupName="jobDiscription">
+            <nz-form-label nzRequired [nzSm]="3">Roles &<br /> Responsibilities</nz-form-label>
             <nz-form-control>
                 <nz-textarea-count [nzMaxCharacterCount]="1000">
-                    <textarea rows="4" nz-input></textarea>
+                    <textarea rows="4" nz-input formControlName="roleResponsiblity"></textarea>
                 </nz-textarea-count>
             </nz-form-control>
         </nz-form-item>
+        <!-- ----------------------------------------->
+        <h2>Panelist Details</h2>
 
-        <nz-form-item>
-            <nz-form-label nzRequired [nzSm]="3">Required <br/>Key Skills </nz-form-label>
+        <nz-form-item formGroupName="interviewPanel">
+            <nz-form-label nzRequired [nzSm]="6" nzFor="interviewPanel"> Add Panelists for thid session</nz-form-label>
             <nz-form-control>
-                <nz-textarea-count [nzMaxCharacterCount]="500">
-                    <textarea rows="3" nz-input></textarea>
-                </nz-textarea-count>
+                <nz-select name="interviewPanel" nzMode="tags" nzPlaceHolder="Panelists" formControlName="panelistName">
+                    <nz-option *ngFor="let option of listOfSkillsOption" [nzLabel]="option.label"
+                        [nzValue]="option.value"></nz-option>
+                </nz-select>
             </nz-form-control>
         </nz-form-item>
-
     </form>
+
+    {{interviewForm.value | json}}
+    {{interviewForm.valid | json}}
 </nz-content>
