@@ -5,10 +5,11 @@ import {
   UntypedFormBuilder,
   Validators,
 } from '@angular/forms';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, map } from 'rxjs';
 import { InterviewService } from 'src/app/services/dashboard/interview.service';
-
+import {Constants}  from 'src/app/models/constants';
 @Component({
   selector: 'app-interviewform',
   templateUrl: './interviewform.component.html',
@@ -22,16 +23,10 @@ export class InterviewformComponent implements OnInit {
     { key: 'bcom', value: 'B Comm' },
     { key: 'bca', value: 'BCA' },
   ];
-  listOfSkillsOption: Array<any> = [
-    { value: 'btech', label: 'B Tech' },
-    { value: 'bcom', label: 'B Comm' },
-    { value: 'btech2', label: 'B Tech2' },
-    { value: 'bcom4', label: 'B Comm4' },
-    { value: 'bcom5', label: 'B Comm5' },
-    { value: 'bcom6', label: 'B Comm6' },
-    { value: 'bcom7', label: 'B Comm7' },
-    { value: 'bcom8', label: 'B Comm8' },
-  ];
+  listOfSkillsOption = Constants.SkillsOptions;
+  listOfPanelistsOption$ = this.interviewService
+    .get('dashboard/allPanelists')
+    .pipe(map((value: any) => value.panelLists));
   //interviewForm Initialization;
   dynamicForm = this.fb.group({
     basicDeails: this.fb.group({
@@ -55,7 +50,11 @@ export class InterviewformComponent implements OnInit {
       panelistName: [null, Validators.required],
     }),
   });
-  constructor(private fb: FormBuilder, private interviewService : InterviewService) {}
+  constructor(
+    private fb: FormBuilder,
+    private interviewService: InterviewService,
+    private message: NzMessageService
+  ) {}
 
   beforeUpload = (
     file: NzUploadFile,
@@ -81,9 +80,20 @@ export class InterviewformComponent implements OnInit {
 
   ngOnInit() {}
   submitForm(): void {
-    this.interviewService.submitForm(this.dynamicForm.value,'dashboard/addnew').subscribe((resp)=>{
-      console.log("Submitted");
-    })
+    this.interviewService
+      .submitForm(this.dynamicForm.value, 'dashboard/addnew')
+      .subscribe(
+        (resp) => {
+          this.message.create('success', `Save Successfull`);
+          this.dynamicForm.reset();
+        },
+        (error) => {
+          this.message.create(
+            'error',
+            `Unable to Save. ${error?.error?.error || error?.error?.message}`
+          );
+        }
+      );
   }
   handleChange(value: any) {
     this.dynamicForm.controls['basicDeails'].controls['resume'].setValue(

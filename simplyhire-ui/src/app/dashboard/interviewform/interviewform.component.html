@@ -1,7 +1,7 @@
 <div class="headerContainer">
     <h2 nz-typography>Schedule an interview
     </h2>
-    <button nz-button nzType="dashed" nzSize="large"   (click)="submitForm()">Create</button>
+    <button nz-button nzType="dashed" nzSize="large" [disabled]="!dynamicForm.valid" (click)="submitForm()">Create</button>
 </div>
 <nz-content>
     <form nz-form [formGroup]="dynamicForm">
@@ -64,8 +64,8 @@
             <nz-form-label nzRequired [nzSm]="3" nzFor="skills">Required Skils</nz-form-label>
             <nz-form-control>
                 <nz-select name="skills" nzMode="tags" nzPlaceHolder="Skills" formControlName="skills">
-                    <nz-option *ngFor="let option of listOfSkillsOption" [nzLabel]="option.label"
-                        [nzValue]="option.value"></nz-option>
+                    <nz-option *ngFor="let option of listOfSkillsOption" [nzLabel]="option.value"
+                        [nzValue]="option.key"></nz-option>
                 </nz-select>
             </nz-form-control>
 
@@ -108,8 +108,8 @@
             <nz-form-label nzRequired [nzSm]="6" nzFor="interviewPanel"> Add Panelists for thid session</nz-form-label>
             <nz-form-control>
                 <nz-select name="interviewPanel" nzMode="tags" nzPlaceHolder="Panelists" formControlName="panelistName">
-                    <nz-option *ngFor="let option of listOfSkillsOption" [nzLabel]="option.label"
-                        [nzValue]="option.value"></nz-option>
+                    <nz-option *ngFor="let option of listOfPanelistsOption$ | async" [nzLabel]="option.value"
+                        [nzValue]="option.key"></nz-option>
                 </nz-select>
             </nz-form-control>
         </nz-form-item>

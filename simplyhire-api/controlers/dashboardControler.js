@@ -1,5 +1,6 @@
 const { interviewSchema } = require("../utilities/validationSchema");
-const  interviewData  = require("../models/interviewModel");
+const interviewData = require("../models/interviewModel");
+const users = require("../models/usersModel");
 const { decodeToken } = require("../utilities/authToken");
 
 /**
@@ -19,7 +20,7 @@ const home = (req, res, next) => {
 const addNew = async (req, res, next) => {
   try {
     const data = req.body;
-     const validateShema = await interviewSchema.validateAsync(data);
+    const validateShema = await interviewSchema.validateAsync(data);
     const added = await interviewData.insertMany(data);
     res.status(200).json({ addInterview: added });
   } catch (error) {
@@ -37,7 +38,7 @@ const interviews = async (req, res, next) => {
     req.headers.authorization.split(" ")[1] || req.body.token
   );
   const allInterviews = await interviewData.find({
-    interviewerUsername: username,
+    "interviewPanel.panelistName": { $all: [username] },
   });
   res
     .status(200)
@@ -73,10 +74,29 @@ const updateView = async (req, res, next) => {
   res.status(200).json({ update: singleInterview });
 };
 
+/**
+ * @desc   List of all users
+ * @route  POST /api/v1/dashboard/allpanelists
+ * @access Public
+ */
+
+const allPanelists = async (req, resp, next) => {
+  try {
+    panelLists = await users.find();
+    panelLists = panelLists.map((username) => {
+      return { value: username.username, key: username._id };
+    });
+    resp.status(200).json({ panelLists });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   home,
   addNew,
   interviews,
   fullView,
   updateView,
+  allPanelists,
 };

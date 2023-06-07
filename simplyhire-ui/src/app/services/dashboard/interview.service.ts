@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { InjectDecorator, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Constants } from "src/app/models/constants";
 
 @Injectable({
@@ -12,7 +12,11 @@ export class InterviewService {
 
     submitForm(formData:Object,URL:String){
         const url = Constants.BASE_URL + URL ;
-
         return this.http.put(url, formData);
+    }
+
+    get(URL:string){
+        const url = Constants.BASE_URL + URL ;
+        return this.http.get(url);
     }
 } 
