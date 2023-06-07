@@ -9,7 +9,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer, map } from 'rxjs';
 import { InterviewService } from 'src/app/services/dashboard/interview.service';
-import {Constants}  from 'src/app/models/constants';
+import { Constants } from 'src/app/models/constants';
 @Component({
   selector: 'app-interviewform',
   templateUrl: './interviewform.component.html',
@@ -82,20 +82,21 @@ export class InterviewformComponent implements OnInit {
   submitForm(): void {
     this.interviewService
       .submitForm(this.dynamicForm.value, 'dashboard/addnew')
-      .subscribe(
-        (resp) => {
-          this.message.create('success', `Save Successfull`);
+      .subscribe({
+        next: () => {
           this.dynamicForm.reset();
         },
-        (error) => {
+        error: (error) => {
           this.message.create(
             'error',
             `Unable to Save. ${error?.error?.error || error?.error?.message}`
           );
-        }
-      );
+        },
+      });
   }
+
   handleChange(value: any) {
+    console.log(value);
     this.dynamicForm.controls['basicDeails'].controls['resume'].setValue(
       'valaa'
     );

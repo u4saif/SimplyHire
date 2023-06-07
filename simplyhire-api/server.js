@@ -8,6 +8,7 @@ const { authMiddleware } = require("./middleware/authMiddleware");
 const PORT = process.env.PORT || 5000;
 const authRoutes = require("../simplyhire-api/routes/authRoute");
 const dashboardRoutes = require("../simplyhire-api/routes/dashboardRoute");
+const resumeRoutes = require("../simplyhire-api/routes/resumeRoutes");
 const {
   errorHandler,
 } = require("../simplyhire-api/middleware/errorMiddleware");
@@ -35,6 +36,7 @@ app.use(express.json());
  */
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/dashboard", authMiddleware, dashboardRoutes);
+app.use("/api/v1/resume", authMiddleware, resumeRoutes);
 
 /**
  * Use the ErrorHandler to catch app wise Errors
