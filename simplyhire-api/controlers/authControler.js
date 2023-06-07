@@ -19,7 +19,7 @@ const register = async (req, res, next) => {
     const userData = await users(req.body);
     const result = await userData.save();
     const { token, refToken } = {
-      ...generateToken({ username: req.body.username }),
+      ...generateToken({ username: req.body.username , id :  result['_id']}),
     };
     res.status(201).json({ token: "Bearer " + token, refToken });
   } catch (error) {
@@ -42,7 +42,7 @@ const login = async (req, res, next) => {
       false;
     if (compare) {
       const { token, refToken } = {
-        ...generateToken({ username: req.body.username }),
+        ...generateToken({ username: req.body.username, id: getuser._id }),
       };
       res.status(201).json({ token: "Bearer " + token, refToken });
     } else {

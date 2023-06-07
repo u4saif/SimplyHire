@@ -34,11 +34,11 @@ const addNew = async (req, res, next) => {
  * @access Private
  */
 const interviews = async (req, res, next) => {
-  const { username } = decodeToken(
+  const { username , id } = decodeToken(
     req.headers.authorization.split(" ")[1] || req.body.token
   );
   const allInterviews = await interviewData.find({
-    "interviewPanel.panelistName": { $all: [username] },
+    "interviewPanel.panelistName": { $all: id },
   });
   res
     .status(200)

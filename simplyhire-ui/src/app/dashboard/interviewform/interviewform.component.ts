@@ -40,10 +40,10 @@ export class InterviewformComponent implements OnInit {
       resume: ['', Validators.required],
     }),
     jobDiscription: this.fb.group({
-      purpouse: ['', [Validators.required, Validators.maxLength(250)]],
+      purpouse: ['', [Validators.required, Validators.maxLength(500)]],
       roleResponsiblity: [
         '',
-        [Validators.required, Validators.maxLength(1000)],
+        [Validators.required, Validators.maxLength(3000)],
       ],
     }),
     interviewPanel: this.fb.group({
