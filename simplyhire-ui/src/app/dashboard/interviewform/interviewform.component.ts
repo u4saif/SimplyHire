@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer, map } from 'rxjs';
 import { InterviewService } from 'src/app/services/dashboard/interview.service';
 import { Constants } from 'src/app/models/constants';
@@ -37,7 +37,7 @@ export class InterviewformComponent implements OnInit {
       interviewDate: [null, Validators.required],
       qualification: ['', Validators.required],
       skills: [[], Validators.required],
-      resume: ['', Validators.required],
+      resume: [null, Validators.required],
     }),
     jobDiscription: this.fb.group({
       purpouse: ['', [Validators.required, Validators.maxLength(500)]],
@@ -56,28 +56,6 @@ export class InterviewformComponent implements OnInit {
     private message: NzMessageService
   ) {}
 
-  beforeUpload = (
-    file: NzUploadFile,
-    _fileList: NzUploadFile[]
-  ): Observable<boolean> =>
-    new Observable((observer: Observer<boolean>) => {
-      const isJpgOrPng =
-        file.type === 'image/jpeg' || file.type === 'image/png';
-      if (!isJpgOrPng) {
-        //this.msg.error('You can only upload JPG file!');
-        observer.complete();
-        return;
-      }
-      const isLt2M = file.size! / 1024 / 1024 < 2;
-      if (!isLt2M) {
-        // this.msg.error('Image must smaller than 2MB!');
-        observer.complete();
-        return;
-      }
-      observer.next(isJpgOrPng && isLt2M);
-      observer.complete();
-    });
-
   ngOnInit() {}
   submitForm(): void {
     this.interviewService
@@ -95,10 +73,46 @@ export class InterviewformComponent implements OnInit {
       });
   }
 
-  handleChange(value: any) {
-    console.log(value);
-    this.dynamicForm.controls['basicDeails'].controls['resume'].setValue(
-      'valaa'
-    );
+  async handleChange(value: any) {
+    const { name, size, type } = value.file;
+    const file = value.file.originFileObj;
+    const convertedData = (await this.convertToBase64(file)) as string;
+
+    if (value.type == 'start') {
+      this.interviewService
+        .uplodFile('resume/new-upload', {
+          fileData: convertedData,
+          name,
+          size,
+          type,
+        })
+        .subscribe((resp: any) => {
+          const fileId = resp.resume[0]['_id'];
+          console.log(this.dynamicForm);
+          this.dynamicForm.controls['basicDeails'].controls['resume'].setValue(
+            fileId
+          );
+          this.message.create('success', 'File uploaded successfully!');
+        });
+    }
+
+    if (value.type == 'removed') {
+      this.dynamicForm.controls['basicDeails'].controls['resume'].setValue(
+        null
+      );
+    }
+  }
+
+  convertToBase64(file: any) {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
   }
 }

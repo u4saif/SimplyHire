@@ -2,11 +2,11 @@ const resume = require("../models/resumeModel");
 
 /**
  * @desc   Home Page
- * @route  POST /api/v1/new-upload
+ * @route  POST /api/v1/resume/new-upload
  * @access Private
  */
 const upload = async (req,res,next) =>{
-    const { fileName, fileData, fileExtension } = req.body;
+    const { name, fileData, size, type } = req.body;
 
     try {
         const data = req.body;

@@ -68,11 +68,13 @@
                         [nzValue]="option.key"></nz-option>
                 </nz-select>
             </nz-form-control>
-
             <nz-form-label nzRequired [nzSm]="3" nzFor="interviewDate">Resume</nz-form-label>
             <nz-form-control>
-                <nz-upload nzType="drag" [nzMultiple]="true"
-                    (nzChange)="handleChange($event)">
+                <nz-upload nzType="drag"
+                    nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    (nzChange)="handleChange($event)"
+                    [nzDisabled]="this.dynamicForm.controls['basicDeails'].controls['resume'].value"
+                    >
                     <p class="ant-upload-drag-icon">
                         <span nz-icon nzType="inbox"></span>
                     </p>
@@ -116,5 +118,5 @@
     </form>
 
     {{dynamicForm.value | json}}
-    {{dynamicForm.valid | json}}
+    {{dynamicForm.controls['basicDeails'].controls['resume'].value }}
 </nz-content>
