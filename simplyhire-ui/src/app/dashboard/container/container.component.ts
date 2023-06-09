@@ -6,14 +6,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-container',
   templateUrl: './container.component.html',
-  styleUrls: ['./container.component.less']
+  styleUrls: ['./container.component.less'],
 })
 export class ContainerComponent implements OnInit {
   isCollapsed = false;
   constructor(
     private authService: AuthService,
     private storageService: StorageService,
-    private route: Router,
+    private route: Router
   ) {}
 
   ngOnInit(): void {}

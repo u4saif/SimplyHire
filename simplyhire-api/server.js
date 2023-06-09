@@ -29,7 +29,7 @@ dotenv.config({ path: "./configs/config.env" });
  * Database Conection
  */
 connectDB();
-app.use(express.json());
+app.use(express.json({limit: '25mb'}));
 
 /**
  * App Routes
