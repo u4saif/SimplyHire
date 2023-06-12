@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { InterviewformComponent } from './interviewform/interviewform.component';
 import { ContainerComponent } from './container/container.component';
 import { IsFormDirtyGuard } from '../utils/gaurds/is-form-dirty.guard';
+import { InterviewScoreComponent } from './interview-score/interview-score.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent, canActivate: [] },
       { path: 'schedule', component: InterviewformComponent, canDeactivate: [IsFormDirtyGuard] },
+      { path: 'scores/:id',  component: InterviewScoreComponent, canDeactivate: [IsFormDirtyGuard]}
     ],
   },
 ];

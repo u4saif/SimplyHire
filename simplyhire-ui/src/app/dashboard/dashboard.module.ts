@@ -8,13 +8,15 @@ import { IconsProviderModule } from '../icons-provider.module';
 import { InterviewformComponent } from './interviewform/interviewform.component';
 import { ContainerComponent } from './container/container.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { InterviewScoreComponent } from './interview-score/interview-score.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     InterviewformComponent,
-    ContainerComponent
+    ContainerComponent,
+    InterviewScoreComponent
   ],
   imports: [
     CommonModule,

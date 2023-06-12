@@ -17,7 +17,7 @@
                 Not Available
               </nz-list-item-action>
               <nz-list-item-action>
-                <a (click)="msg.info('edit')">View</a>
+                <a  routerLink="/dashboard/scores/{{item._id}}">View</a>
               </nz-list-item-action>
             </ul>
             <strong>{{item.basicDeails.name}}</strong>
