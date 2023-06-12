@@ -1,27 +1,53 @@
 <nz-content>
-<h2 nz-typography class="textHeading">Your Dashborad</h2>
-<div class="cardHeading">
-  <nz-card [nzBordered]="false" nzTitle="Up Comming Interviews" [nzExtra]="extraTemplate">
-    <p>Card content</p>
-    <p>Card content</p>
- 
-    <p>Card content</p>
-  </nz-card>
-</div>
-<ng-template #extraTemplate>
-  <a style="color: #1890ff" nz-button nz-dropdown nzType="text" [nzDropdownMenu]="menu3" nzPlacement="bottomRight">More
-  </a>
-  <nz-dropdown-menu #menu3="nzDropdownMenu">
-    <ul nz-menu>
-      <li nz-menu-item>Old Interviews</li>
-      <li nz-menu-item>All Interviews</li>
-    </ul>
-  </nz-dropdown-menu>
 
-</ng-template>
+  <div class="cardHeading">
 
-<div class="cardHeading">
-  <nz-card [nzBordered]="true" nzTitle="Internal Job Posting">
-  </nz-card>
-</div>
+    <nz-card [nzBordered]="true" nzTitle="Up Comming Interviews" [nzExtra]="extraTemplate">
+
+      <ul nz-list nzBordered nzSize="default">
+        <li nz-list-item *ngFor="let item of data" nzNoFlex>
+          <nz-card [nzHoverable]="true">
+            <ul nz-list-item-actions>
+              <nz-list-item-action>
+               {{item.basicDeails.interviewDate | date:'h:mm a, MMM d'}}
+             </nz-list-item-action>
+              <nz-list-item-action>
+                Ratting:
+                <span nz-icon nzType="star-o" style="margin-right: 8px;"></span>
+                Not Available
+              </nz-list-item-action>
+              <nz-list-item-action>
+                <a (click)="msg.info('edit')">View</a>
+              </nz-list-item-action>
+            </ul>
+            <strong>{{item.basicDeails.name}}</strong>
+            <p>{{item.basicDeails.qualification | uppercase}} | {{item.basicDeails.email}} | {{item.basicDeails.mobile}} </p>
+            <p>{{item.jobDiscription.purpouse}}</p> 
+            <ng-container  *ngFor="let skill of item.basicDeails.skills;index as i">
+              <ng-container *ngIf="i != 0">| </ng-container> 
+              <span nz-icon nzType="tags" nzTheme="twotone"></span>
+              {{skill}} 
+            </ng-container  >
+          </nz-card>
+        </li>
+      </ul>
+    </nz-card>
+
+    <!-- <nz-list-footer>Footer</nz-list-footer> -->
+
+  </div>
+
+  <ng-template #extraTemplate>
+    <a style="color: #1890ff" nz-button nz-dropdown nzType="text" [nzDropdownMenu]="menu3"
+      nzPlacement="bottomRight">More
+    </a>
+    <nz-dropdown-menu #menu3="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item>Old Interviews</li>
+        <li nz-menu-item>All Interviews</li>
+      </ul>
+    </nz-dropdown-menu>
+
+  </ng-template>
+
 </nz-content>
