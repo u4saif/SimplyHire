@@ -1,6 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { InterviewService } from 'src/app/services/dashboard/interview.service';
+import { interviewBasicDetails } from 'src/app/models/interviewScores.model';
 
 @Component({
   selector: 'app-interview-score',
@@ -8,33 +9,7 @@ import { InterviewService } from 'src/app/services/dashboard/interview.service';
   styleUrls: ['./interview-score.component.less'],
 })
 export class InterviewScoreComponent implements OnInit {
-  tabs = [
-    {
-      tabName: 'Details',
-      containt: {
-        name: '',
-        email: '',
-        mobile: '',
-        otherNumber: '',
-        interviewDate: '',
-        qualification: '',
-        skills: [],
-        resume: '',
-      },
-    },
-    {
-      tabName: 'Job Discriton',
-      containt: {
-        purpouse: '',
-        roleResponsiblity: '',
-      },
-    },
-    { tabName: 'Assessment Scores', containt: {
-      overAllScore:'',
-      
-    } },
-    { tabName: 'Resume', containt: {} },
-  ];
+  tabs = new interviewBasicDetails();
   paramsObject: any;
   interviewId: String | undefined;
   fullviewInterview: any = [];
@@ -52,7 +27,7 @@ export class InterviewScoreComponent implements OnInit {
       `dashboard/fullView/${this.interviewId}`
     ).subscribe((response: any) => {
       this.fullviewInterview = response.singleInterview[0];
-      this.tabs = this.tabs.map(
+      this.tabs.data = this.tabs.data.map(
         (item) =>
           (item = {
             ...item,

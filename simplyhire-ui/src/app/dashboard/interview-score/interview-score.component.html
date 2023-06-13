@@ -1,6 +1,6 @@
 <nz-content>
     <nz-tabset >
-        <ng-container *ngFor="let tab of tabs"> 
+        <ng-container *ngFor="let tab of tabs.data"> 
             <nz-tab nzTitle="{{tab.tabName}}">
                 <ng-container *ngIf="tab.tabName == 'Details'">
 
