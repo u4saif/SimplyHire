@@ -18,7 +18,8 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
-
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 @NgModule({
   declarations: [],
   imports: [
@@ -40,7 +41,9 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
     NzDatePickerModule,
     NzModalModule,
     NzListModule,
-    NzSkeletonModule
+    NzSkeletonModule,
+    NzTabsModule,
+    NzDescriptionsModule
   ],
   exports: [
     CommonModule,
@@ -61,7 +64,9 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
     NzDatePickerModule,
     NzModalModule,
     NzListModule,
-    NzSkeletonModule
+    NzSkeletonModule,
+    NzTabsModule,
+    NzDescriptionsModule
   ]
 })
 export class NgZorroComponentProviderModule { }

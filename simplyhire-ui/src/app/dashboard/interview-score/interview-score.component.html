@@ -1,1 +1,35 @@
-<p>interview-score works!</p>
+<nz-content>
+    <nz-tabset >
+        <ng-container *ngFor="let tab of tabs"> 
+            <nz-tab nzTitle="{{tab.tabName}}">
+                <ng-container *ngIf="tab.tabName == 'Details'">
+
+                    <nz-descriptions nzTitle="Candidate Details" nzBordered>
+                        <nz-descriptions-item nzTitle="Name"><strong>{{ tab.containt.name }}</strong></nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="Email">{{tab.containt.email}}</nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="Mobile">{{tab.containt.mobile }}</nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="Interview Time" [nzSpan]="2">
+                            {{tab.containt.interviewDate | date:'MMM d, y, h:mm a'}}
+                        </nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="Other Number">{{tab.containt.otherNumber}}</nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="qualification" [nzSpan]="3">{{tab.containt.qualification | uppercase}}</nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="Skills" >
+                            <ng-container *ngFor="let skill of tab.containt.skills">
+                                <span nz-icon nzType="tags" nzTheme="twotone"></span> {{skill}}
+                                <br/>
+                            </ng-container>
+                        </nz-descriptions-item>
+                    </nz-descriptions>
+                </ng-container>
+                
+                <ng-container *ngIf="tab.tabName == 'Job Discriton'">
+                    <nz-descriptions nzTitle="Requirement Details " nzBordered>
+                        <nz-descriptions-item nzTitle="Purpouse" [nzSpan]="3">{{ tab.containt.purpouse }}</nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="Role & Responsiblity" [nzSpan]="3">{{tab.containt.roleResponsiblity}}</nz-descriptions-item>
+                    </nz-descriptions>
+                </ng-container>
+
+            </nz-tab>
+        </ng-container>
+      </nz-tabset>
+</nz-content>

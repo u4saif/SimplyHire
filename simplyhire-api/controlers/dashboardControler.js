@@ -51,9 +51,13 @@ const interviews = async (req, res, next) => {
  * @access Private
  */
 const fullView = async (req, res, next) => {
-  const interviewID = req.params.id;
-  const singleInterview = await interviewData.find({ _id: interviewID });
-  res.status(200).json({ singleInterview, interviewID });
+ try {
+   const interviewID = req.params.id;
+   const singleInterview = await interviewData.find({ _id: interviewID });
+   res.status(200).json({ singleInterview, interviewID });
+ } catch (error) {
+   next(error);
+ }
 };
 
 /**
