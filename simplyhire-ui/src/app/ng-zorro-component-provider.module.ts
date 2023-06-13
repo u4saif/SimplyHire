@@ -20,6 +20,8 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzRateModule } from 'ng-zorro-antd/rate';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -43,7 +45,8 @@ import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
     NzListModule,
     NzSkeletonModule,
     NzTabsModule,
-    NzDescriptionsModule
+    NzDescriptionsModule,
+    NzRateModule
   ],
   exports: [
     CommonModule,
@@ -66,7 +69,8 @@ import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
     NzListModule,
     NzSkeletonModule,
     NzTabsModule,
-    NzDescriptionsModule
+    NzDescriptionsModule,
+    NzRateModule
   ]
 })
 export class NgZorroComponentProviderModule { }

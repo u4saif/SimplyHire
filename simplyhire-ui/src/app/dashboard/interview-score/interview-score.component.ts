@@ -13,6 +13,8 @@ export class InterviewScoreComponent implements OnInit {
   paramsObject: any;
   interviewId: String | undefined;
   fullviewInterview: any = [];
+  tooltips = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
+  value = 3;
   constructor(
     private InterviewService: InterviewService,
     private route: ActivatedRoute
@@ -36,11 +38,26 @@ export class InterviewScoreComponent implements OnInit {
                 ? this.fullviewInterview.basicDeails
                 : item.tabName == 'Job Discriton'
                 ? this.fullviewInterview.jobDiscription
+                : item.tabName == 'Assessment Scores'
+                ? this.createAssessmentModel(this.fullviewInterview)
                 : {},
           })
       );
 
       console.log(this.tabs);
     });
+  }
+
+  createAssessmentModel(interviewForm: any) {
+    return {
+      skills: interviewForm.basicDeails.skills.map((item: any) => {
+        return {
+          skillName: item,
+          comment: '',
+          score: '',
+        };
+      }),
+      overAllScore: ''
+    };
   }
 }

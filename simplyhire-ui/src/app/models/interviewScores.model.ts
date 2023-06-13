@@ -23,6 +23,11 @@ export class interviewBasicDetails {
     {
       tabName: 'Assessment Scores',
       containt: {
+        skills:[{
+          skillName: '',
+          comment: '',
+          score: '',
+        }],
         overAllScore: '',
       },
     },

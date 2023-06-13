@@ -29,6 +29,23 @@
                     </nz-descriptions>
                 </ng-container>
 
+                <ng-container *ngIf="tab.tabName == 'Assessment Scores'">
+                    <nz-descriptions nzTitle="Assessment Scores" nzBordered>
+                        <ng-container *ngFor="let skill of tab.containt.skills">
+                            <nz-descriptions-item nzTitle="{{skill?.skillName}}" [nzSpan]="4"> 
+                                <textarea rows="3" nz-input placeholder="Please some comments" ></textarea> 
+                                <nz-rate [(ngModel)]="value" [nzTooltips]="tooltips"></nz-rate>
+                                <span *ngIf="value" class="ant-rate-text"><i> {{ value ? tooltips[value - 1] : '' }}</i></span>
+                            </nz-descriptions-item>
+                        </ng-container>
+                        <nz-descriptions-item nzTitle="Over All Ratting" [nzSpan]="4">
+                            <textarea rows="3" nz-input placeholder="Over All Feedback" ></textarea>
+                            <br/>
+                            <button style="margin-top: 1em;" nz-button nzType="dashed" nzBlock>Submit the Scores</button>
+                        </nz-descriptions-item>
+                    </nz-descriptions>
+                </ng-container>
+
             </nz-tab>
         </ng-container>
       </nz-tabset>

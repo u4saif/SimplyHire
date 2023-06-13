@@ -7,7 +7,7 @@ import { NgZorroComponentProviderModule } from '../ng-zorro-component-provider.m
 import { IconsProviderModule } from '../icons-provider.module';
 import { InterviewformComponent } from './interviewform/interviewform.component';
 import { ContainerComponent } from './container/container.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InterviewScoreComponent } from './interview-score/interview-score.component';
 
 
@@ -20,6 +20,7 @@ import { InterviewScoreComponent } from './interview-score/interview-score.compo
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     DashboardRoutingModule,
     IconsProviderModule,
