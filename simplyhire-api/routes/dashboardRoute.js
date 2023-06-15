@@ -8,6 +8,6 @@ routes.get("/allPanelists", dashboardControler.allPanelists);
 routes.put("/addnew", dashboardControler.addNew);
 routes
   .get("/fullview/:id", dashboardControler.fullView)
-  .put("/fullview/:id", dashboardControler.fullView);
+  .put("/fullview/:id", dashboardControler.updateView);
 
 module.exports = routes;

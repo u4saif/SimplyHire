@@ -46,7 +46,7 @@
                             <h4 nz-typography> <strong>Feedback Form </strong>
                             </h4>
                             <button nz-button nzType="primary" nzSize="large"
-                                [disabled]="!scoreCardForm.valid">Submit</button>
+                                [disabled]="!scoreCardForm.valid" (click)="submitScores()">Submit</button>
                         </div>
                         <form [formGroup]="scoreCardForm">
                             <ng-container formArrayName="scoreDetails">

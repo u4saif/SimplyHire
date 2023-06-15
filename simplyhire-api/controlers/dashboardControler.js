@@ -68,14 +68,16 @@ const fullView = async (req, res, next) => {
  */
 const updateView = async (req, res, next) => {
   //Will update the interview Details
-  const interviewID = req.params.interviewID;
-  const { valueNeedData, interviewerName } = req.body;
+  const interviewID = req.params.id;
+  const { username , id } = decodeToken(
+    req.headers.authorization.split(" ")[1] || req.body.token
+  );
+  const interViewedBy = {interViewedBy: { email:username , id }};
+  const { scoreCard } = req.body;
   const singleInterview = await interviewData.updateOne(
     { _id: interviewID },
-    { $set: { data: valueNeedData, interviewerName } }
+    { $set: { scoreCard: scoreCard , interViewedBy: interViewedBy} }
   );
-  const updatedData = { ...valueNeedData, ...singleInterview.data };
-  console.log(updatedData);
   res.status(200).json({ update: singleInterview });
 };
 

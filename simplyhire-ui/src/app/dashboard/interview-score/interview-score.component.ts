@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { InterviewService } from 'src/app/services/dashboard/interview.service';
 import { interviewBasicDetails } from 'src/app/models/interviewScores.model';
-
+import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-interview-score',
   templateUrl: './interview-score.component.html',
@@ -27,6 +27,7 @@ export class InterviewScoreComponent implements OnInit {
   constructor(
     private InterviewService: InterviewService,
     private route: ActivatedRoute,
+    private message: NzMessageService,
     private fb: FormBuilder
   ) {}
 
@@ -79,5 +80,23 @@ export class InterviewScoreComponent implements OnInit {
   }
   get scoreDetails() {
     return this.scoreCardForm.controls['scoreDetails'] as FormArray;
+  }
+
+  /**
+   * Submit the feedback Form
+   */
+  submitScores() {
+    const formData = { scoreCard: this.scoreDetails.value };
+    this.InterviewService.updateFormData(
+      `dashboard/fullView/${this.interviewId}`,
+      formData
+    ).subscribe({
+      next: () => {
+        this.message.create('success', 'Data Saved Successfully!');
+      },
+      error: () => {
+        this.message.create('error', 'Some Error Occured :(');
+      },
+    });
   }
 }

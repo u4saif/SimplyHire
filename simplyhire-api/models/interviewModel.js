@@ -29,6 +29,7 @@ const interviewData = new Schema({
     },
   },
   scoreCard: { type: Array },
+  interViewedBy: { type: Object },
   interviewPanel: {
     panelistName: {
       type: Array,

@@ -62,6 +62,7 @@ export class InterviewformComponent implements OnInit {
       .submitForm(this.dynamicForm.value, 'dashboard/addnew')
       .subscribe({
         next: () => {
+          this.message.create('success', 'Data Saved Successfully!');
           this.dynamicForm.reset();
         },
         error: (error) => {
