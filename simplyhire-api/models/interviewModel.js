@@ -28,12 +28,24 @@ const interviewData = new Schema({
       required: [true, "please provide purpouse"],
     },
   },
+  scoreCard: { type: Array },
   interviewPanel: {
     panelistName: {
       type: Array,
       require: [true, "please provide at least one panelist name"],
     },
   },
+});
+
+interviewData.pre("save", function (next) {
+  this.scoreCard = this.basicDeails.skills.map((item) => {
+    return {
+      skillName: item,
+      comment: null,
+      score: null,
+    };
+  });
+  next();
 });
 
 module.exports = mongoose.model("interviewData", interviewData);

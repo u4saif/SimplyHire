@@ -21,7 +21,8 @@ const addNew = async (req, res, next) => {
   try {
     const data = req.body;
     const validateShema = await interviewSchema.validateAsync(data);
-    const added = await interviewData.insertMany(data);
+    const interview = await interviewData(data);
+    const added = await interview.save();
     res.status(200).json({ addInterview: added });
   } catch (error) {
     next(error);

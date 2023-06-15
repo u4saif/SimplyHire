@@ -1,52 +1,79 @@
 <nz-content>
-    <nz-tabset >
-        <ng-container *ngFor="let tab of tabs.data"> 
+    <nz-tabset nzSelectedIndex="2">
+        <ng-container *ngFor="let tab of tabs.data">
             <nz-tab nzTitle="{{tab.tabName}}">
                 <ng-container *ngIf="tab.tabName == 'Details'">
 
                     <nz-descriptions nzTitle="Candidate Details" nzBordered>
-                        <nz-descriptions-item nzTitle="Name"><strong>{{ tab.containt.name }}</strong></nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="Name"><strong>{{ tab.containt.name
+                                }}</strong></nz-descriptions-item>
                         <nz-descriptions-item nzTitle="Email">{{tab.containt.email}}</nz-descriptions-item>
                         <nz-descriptions-item nzTitle="Mobile">{{tab.containt.mobile }}</nz-descriptions-item>
                         <nz-descriptions-item nzTitle="Interview Time" [nzSpan]="2">
                             {{tab.containt.interviewDate | date:'MMM d, y, h:mm a'}}
                         </nz-descriptions-item>
                         <nz-descriptions-item nzTitle="Other Number">{{tab.containt.otherNumber}}</nz-descriptions-item>
-                        <nz-descriptions-item nzTitle="qualification" [nzSpan]="3">{{tab.containt.qualification | uppercase}}</nz-descriptions-item>
-                        <nz-descriptions-item nzTitle="Skills" >
+                        <nz-descriptions-item nzTitle="qualification" [nzSpan]="3">{{tab.containt.qualification |
+                            uppercase}}</nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="Skills">
                             <ng-container *ngFor="let skill of tab.containt.skills">
                                 <span nz-icon nzType="tags" nzTheme="twotone"></span> {{skill}}
-                                <br/>
+                                <br />
                             </ng-container>
                         </nz-descriptions-item>
                     </nz-descriptions>
                 </ng-container>
-                
+
                 <ng-container *ngIf="tab.tabName == 'Job Discriton'">
                     <nz-descriptions nzTitle="Requirement Details " nzBordered>
-                        <nz-descriptions-item nzTitle="Purpouse" [nzSpan]="3">{{ tab.containt.purpouse }}</nz-descriptions-item>
-                        <nz-descriptions-item nzTitle="Role & Responsiblity" [nzSpan]="3">{{tab.containt.roleResponsiblity}}</nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="Purpouse" [nzSpan]="3">{{ tab.containt.purpouse
+                            }}</nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="Role & Responsiblity"
+                            [nzSpan]="3">{{tab.containt.roleResponsiblity}}</nz-descriptions-item>
                     </nz-descriptions>
                 </ng-container>
 
                 <ng-container *ngIf="tab.tabName == 'Assessment Scores'">
-                    <nz-descriptions nzTitle="Assessment Scores" nzBordered>
-                        <ng-container *ngFor="let skill of tab.containt.skills">
-                            <nz-descriptions-item nzTitle="{{skill?.skillName}}" [nzSpan]="4"> 
-                                <textarea rows="3" nz-input placeholder="Please some comments" ></textarea> 
-                                <nz-rate [(ngModel)]="value" [nzTooltips]="tooltips"></nz-rate>
-                                <span *ngIf="value" class="ant-rate-text"><i> {{ value ? tooltips[value - 1] : '' }}</i></span>
-                            </nz-descriptions-item>
-                        </ng-container>
-                        <nz-descriptions-item nzTitle="Over All Ratting" [nzSpan]="4">
-                            <textarea rows="3" nz-input placeholder="Over All Feedback" ></textarea>
-                            <br/>
-                            <button style="margin-top: 1em;" nz-button nzType="dashed" nzBlock>Submit the Scores</button>
-                        </nz-descriptions-item>
-                    </nz-descriptions>
+                    <ng-container *ngIf="isLoading">
+                        <nz-spin nzTip="Loading...">
+                            <nz-alert nzType="info" nzMessage="Please Wait"
+                                nzDescription="Feedback form will display here."></nz-alert>
+                        </nz-spin>
+                    </ng-container>
+
+                    <ng-container *ngIf="!isLoading">
+                        <div class="headerContainer">
+                            <h4 nz-typography> <strong>Feedback Form </strong>
+                            </h4>
+                            <button nz-button nzType="primary" nzSize="large"
+                                [disabled]="!scoreCardForm.valid">Submit</button>
+                        </div>
+                        <form [formGroup]="scoreCardForm">
+                            <ng-container formArrayName="scoreDetails">
+                                <ng-container *ngFor="let item of scoreDetails.controls;index as i">
+
+                                    <div formGroupName="{{i}}" style="margin-bottom: 1em;">
+                                        <nz-card style="width:100%;" nzType="inner" nzSize="small"
+                                            nzTitle="{{scoreCardForm.value.scoreDetails[i].skillName}}"
+                                            [nzExtra]="extraTemplate">
+                                            <textarea rows="3" formControlName="comment" nz-input
+                                                placeholder="Your Feedback"></textarea>
+                                        </nz-card>
+                                        <ng-template #extraTemplate>
+                                            <span *ngIf="scoreCardForm.value.scoreDetails[i].score"
+                                                class="ant-rate-text"><i> {{ scoreCardForm.value.scoreDetails[i].score ?
+                                                    tooltips[scoreCardForm.value.scoreDetails[i].score - 1] : ''
+                                                    }}</i></span>
+                                            <nz-rate formControlName="score" [nzTooltips]="tooltips"></nz-rate>
+                                        </ng-template>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </form>
+                    </ng-container>
                 </ng-container>
 
             </nz-tab>
         </ng-container>
-      </nz-tabset>
+    </nz-tabset>
 </nz-content>

@@ -21,7 +21,8 @@ import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzRateModule } from 'ng-zorro-antd/rate';
-
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 @NgModule({
   declarations: [],
   imports: [
@@ -46,7 +47,9 @@ import { NzRateModule } from 'ng-zorro-antd/rate';
     NzSkeletonModule,
     NzTabsModule,
     NzDescriptionsModule,
-    NzRateModule
+    NzRateModule,
+    NzSpinModule,
+    NzAlertModule
   ],
   exports: [
     CommonModule,
@@ -70,7 +73,9 @@ import { NzRateModule } from 'ng-zorro-antd/rate';
     NzSkeletonModule,
     NzTabsModule,
     NzDescriptionsModule,
-    NzRateModule
+    NzRateModule,
+    NzSpinModule,
+    NzAlertModule
   ]
 })
 export class NgZorroComponentProviderModule { }
