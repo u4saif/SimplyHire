@@ -1,5 +1,5 @@
 <nz-content>
-    <nz-tabset nzSelectedIndex="3">
+    <nz-tabset nzSelectedIndex="0">
         <ng-container *ngFor="let tab of tabs.data">
             <nz-tab nzTitle="{{tab.tabName}}">
                 <ng-container *ngIf="tab.tabName == 'Details'">
@@ -87,21 +87,25 @@
                 </ng-container>
 
                 <ng-container *ngIf="tab.tabName == 'Resume'">
+                    <ng-container *ngIf="!resumeBase64Data">
+                        <nz-spin nzTip="Loading...">
+                            <nz-alert nzType="info" nzMessage="Please Wait"
+                                nzDescription="Resume will display here."></nz-alert>
+                        </nz-spin>
+                    </ng-container>
                     <div class="headerContainer">
                         <h4 nz-typography> <strong>Candidate's Resume</strong>
                         </h4>
-                        <button nz-button nzType="dashed" nzSize="large" style="margin-right: 1em;"
-                        [disabled]="!scoreCardForm.valid" (click)="submitScores()">Download</button>
+                        <button nz-button nzType="dashed" nzSize="large" style="margin-right: 1em;">Download</button>
                     </div>
-                     <div id="outerContainer">
+                     <div id="outerContainer" *ngIf="resumeBase64Data">
                         <div class="pdf-container">
                           <pdf-viewer
-                            [src]="base64Sample"
+                            [src]="resumeBase64Data.fileData"
                             [rotation]="0"
                             [original-size]="false"
                             [show-all]="true"
-                            [fit-to-page]="true"
-                            [stick-to-page]="true"
+                            [fit-to-page]="true" 
                             [render-text]="true" 
                             [autoresize]="true"
                             [show-borders]="false"

@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 import { InterviewService } from 'src/app/services/dashboard/interview.service';
 import { interviewBasicDetails } from 'src/app/models/interviewScores.model';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import  {Constants}  from 'src/app/models/constants';
+import { Constants } from 'src/app/models/constants';
 @Component({
   selector: 'app-interview-score',
   templateUrl: './interview-score.component.html',
@@ -20,7 +20,9 @@ import  {Constants}  from 'src/app/models/constants';
 })
 export class InterviewScoreComponent implements OnInit {
   tabs = new interviewBasicDetails();
-  base64Sample=Constants.pdfSample;
+  base64Sample = Constants.pdfSample;
+  resumeID: any = '';
+  resumeBase64Data: any = '';
   paramsObject: any;
   interviewId: String | undefined;
   fullviewInterview: any = [];
@@ -81,11 +83,26 @@ export class InterviewScoreComponent implements OnInit {
       });
       //this.scoreCardForm.disable();
       this.isLoading = false;
+      this.resumeID = this.fullviewInterview.basicDeails.resume;
+      this.getResumeData(this.resumeID);
     });
   }
   get scoreDetails() {
     return this.scoreCardForm.controls['scoreDetails'] as FormArray;
   }
+
+  /**
+   * Getting the Resume Data
+   */
+  getResumeData(resumeID: any) {
+    this.InterviewService.get(`resume/uploaded/${resumeID}`).subscribe({
+      next: (value: any) => {
+        this.resumeBase64Data = value.resume[0];
+        console.log('----', this.resumeBase64Data.fileData);
+      },
+    });
+  }
+
   /**
    * Calculate OverAll Score
    */
