@@ -70,8 +70,8 @@
             </nz-form-control>
             <nz-form-label nzRequired [nzSm]="3" nzFor="interviewDate">Resume</nz-form-label>
             <nz-form-control>
-                <nz-upload nzType="drag"
-                    nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                <nz-upload nzType="drag"  [nzFileType]="'application/pdf'" [nzAccept]="'.pdf'"
+                    nzAction="http://localhost:5000/api/v1/resume/new-upload"
                     (nzChange)="handleChange($event)"
                     [nzDisabled]="this.dynamicForm.controls['basicDeails'].controls['resume'].value"
                     >
