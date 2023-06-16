@@ -45,8 +45,12 @@
                         <div class="headerContainer">
                             <h4 nz-typography> <strong>Feedback Form </strong>
                             </h4>
-                            <button nz-button nzType="primary" nzSize="large"
+                            <div>
+                                <button nz-button nzType="dashed" nzSize="large" style="margin-right: 1em;"
+                                [disabled]="!scoreCardForm.valid" (click)="submitScores()">Edit</button>
+                                <button nz-button nzType="primary" nzSize="large"
                                 [disabled]="!scoreCardForm.valid" (click)="submitScores()">Submit</button>
+                            </div>
                         </div>
                         <form [formGroup]="scoreCardForm">
                             <ng-container formArrayName="scoreDetails">
@@ -61,10 +65,19 @@
                                         </nz-card>
                                         <ng-template #extraTemplate>
                                             <span *ngIf="scoreCardForm.value.scoreDetails[i].score"
-                                                class="ant-rate-text"><i> {{ scoreCardForm.value.scoreDetails[i].score ?
+                                                class="ant-rate-text">
+                                                <i *ngIf="scoreCardForm.value.scoreDetails[i].skillName != 'Over ALL Score'"> 
+                                                    {{ scoreCardForm.value.scoreDetails[i].score ?
                                                     tooltips[scoreCardForm.value.scoreDetails[i].score - 1] : ''
-                                                    }}</i></span>
-                                            <nz-rate formControlName="score" [nzTooltips]="tooltips"></nz-rate>
+                                                    }}</i>
+
+                                                <p *ngIf="scoreCardForm.value.scoreDetails[i].skillName == 'Over ALL Score'">
+                                                    {{ scoreCardForm.value.scoreDetails[i].score ?
+                                                    tooltipEmoji[scoreCardForm.value.scoreDetails[i].score - 1] : ''
+                                                    }}</p>
+                                                </span>
+                                            <nz-rate [nzAllowClear]="false" formControlName="score" [nzTooltips]="scoreCardForm.value.scoreDetails[i].skillName != 'Over ALL Score' ? tooltips : []" [nzDisabled]="scoreCardForm.value.scoreDetails[i].skillName == 'Over ALL Score' ? true : false"
+                                            (ngModelChange)="reCalculatedScore(scoreCardForm.value.scoreDetails[i].skillName)"></nz-rate>
                                         </ng-template>
                                     </div>
                                 </ng-container>

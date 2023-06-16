@@ -1,4 +1,5 @@
 import {
+  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
@@ -22,6 +23,7 @@ export class InterviewScoreComponent implements OnInit {
   interviewId: String | undefined;
   fullviewInterview: any = [];
   tooltips = ['terrible', 'bad', 'normal', 'good', 'wonderful'];
+  tooltipEmoji = ['🥵', '🥵', '🥺', '😊', '😎'];
   isLoading: boolean = true;
   scoreCardForm!: FormGroup;
   constructor(
@@ -75,11 +77,30 @@ export class InterviewScoreComponent implements OnInit {
         });
         this.scoreDetails.push(groupNames);
       });
+      //this.scoreCardForm.disable();
       this.isLoading = false;
     });
   }
   get scoreDetails() {
     return this.scoreCardForm.controls['scoreDetails'] as FormArray;
+  }
+  /**
+   * Calculate OverAll Score
+   */
+  reCalculatedScore(skill: string) {
+    if (skill == 'Over ALL Score') return;
+    const totalScore = this.scoreCardForm.value.scoreDetails
+      .filter((score: any) => score.skillName != 'Over ALL Score')
+      .map((item: any) => item.score);
+    const totalAverage = Math.floor(
+      totalScore.reduce((item: any, count: any) => item + count, 0) /
+        totalScore.length
+    );
+    this.scoreDetails.controls.forEach((element: any) => {
+      if (element.controls['skillName'].value == 'Over ALL Score') {
+        element.controls['score'].setValue(totalAverage);
+      }
+    });
   }
 
   /**

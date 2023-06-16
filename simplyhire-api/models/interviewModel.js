@@ -46,6 +46,11 @@ interviewData.pre("save", function (next) {
       score: null,
     };
   });
+  this.scoreCard.push({
+    skillName: 'Over ALL Score',
+    comment: null,
+    score: null,
+  });
   next();
 });
 
