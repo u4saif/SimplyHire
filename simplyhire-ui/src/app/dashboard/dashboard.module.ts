@@ -10,7 +10,6 @@ import { ContainerComponent } from './container/container.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InterviewScoreComponent } from './interview-score/interview-score.component';
 
-
 @NgModule({
   declarations: [
     HomeComponent,

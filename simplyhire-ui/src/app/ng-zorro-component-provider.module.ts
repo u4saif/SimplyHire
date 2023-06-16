@@ -23,10 +23,13 @@ import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
+    PdfViewerModule,
     NzLayoutModule,
     NzMenuModule,
     NzInputModule,
@@ -53,6 +56,7 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
   ],
   exports: [
     CommonModule,
+    PdfViewerModule,
     NzLayoutModule,
     NzMenuModule,
     NzInputModule,

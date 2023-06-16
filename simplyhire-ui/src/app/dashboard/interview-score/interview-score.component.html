@@ -1,5 +1,5 @@
 <nz-content>
-    <nz-tabset nzSelectedIndex="2">
+    <nz-tabset nzSelectedIndex="3">
         <ng-container *ngFor="let tab of tabs.data">
             <nz-tab nzTitle="{{tab.tabName}}">
                 <ng-container *ngIf="tab.tabName == 'Details'">
@@ -86,6 +86,29 @@
                     </ng-container>
                 </ng-container>
 
+                <ng-container *ngIf="tab.tabName == 'Resume'">
+                    <div class="headerContainer">
+                        <h4 nz-typography> <strong>Candidate's Resume</strong>
+                        </h4>
+                        <button nz-button nzType="dashed" nzSize="large" style="margin-right: 1em;"
+                        [disabled]="!scoreCardForm.valid" (click)="submitScores()">Download</button>
+                    </div>
+                     <div id="outerContainer">
+                        <div class="pdf-container">
+                          <pdf-viewer
+                            [src]="base64Sample"
+                            [rotation]="0"
+                            [original-size]="false"
+                            [show-all]="true"
+                            [fit-to-page]="true"
+                            [stick-to-page]="true"
+                            [render-text]="true" 
+                            [autoresize]="true"
+                            [show-borders]="false"
+                          ></pdf-viewer>
+                        </div>
+                      </div>
+                </ng-container>
             </nz-tab>
         </ng-container>
     </nz-tabset>

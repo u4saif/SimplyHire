@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 import { InterviewService } from 'src/app/services/dashboard/interview.service';
 import { interviewBasicDetails } from 'src/app/models/interviewScores.model';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import  {Constants}  from 'src/app/models/constants';
 @Component({
   selector: 'app-interview-score',
   templateUrl: './interview-score.component.html',
@@ -19,6 +20,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class InterviewScoreComponent implements OnInit {
   tabs = new interviewBasicDetails();
+  base64Sample=Constants.pdfSample;
   paramsObject: any;
   interviewId: String | undefined;
   fullviewInterview: any = [];
