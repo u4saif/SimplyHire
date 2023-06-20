@@ -73,36 +73,52 @@ export class InterviewformComponent implements OnInit {
         },
       });
   }
-
-  async handleChange(value: any) {
-    const { name, size, type } = value.file;
-    const file = value.file.originFileObj;
-    const convertedData = (await this.convertToBase64(file)) as string;
-
-    if (value.type == 'start') {
-      this.interviewService
-        .uplodFile('resume/new-upload', {
-          fileData: convertedData,
-          name,
-          size,
-          type,
-        })
-        .subscribe((resp: any) => {
-          const fileId = resp.resume[0]['_id'];
-          console.log(this.dynamicForm);
-          this.dynamicForm.controls['basicDeails'].controls['resume'].setValue(
-            fileId
-          );
-          this.message.create('success', 'File uploaded successfully!');
-        });
+  handleChange({ file, fileList }: NzUploadChangeParam): void {
+    const status = file.status;
+    if (status !== 'uploading') {
+      console.log(file, fileList);
     }
-
-    if (value.type == 'removed') {
+    if (status === 'done') {
+      this.message.success(`${file.name} file uploaded successfully.`);
       this.dynamicForm.controls['basicDeails'].controls['resume'].setValue(
-        null
+        file.response.id
       );
+    } else if (status === 'error') {
+      this.message.error(`${file.name} file upload failed.`);
     }
   }
+  /**
+   * Upload With Base64 Encoded
+   */
+  // async handleChange(value: any) {
+  //   const { name, size, type } = value.file;
+  //   const file = value.file.originFileObj;
+  //   const convertedData = (await this.convertToBase64(file)) as string;
+
+  //   if (value.type == 'start') {
+  //     this.interviewService
+  //       .uplodFile('resume/new-upload', {
+  //         fileData: convertedData,
+  //         name,
+  //         size,
+  //         type,
+  //       })
+  //       .subscribe((resp: any) => {
+  //         const fileId = resp.resume[0]['_id'];
+  //         console.log(this.dynamicForm);
+  //         this.dynamicForm.controls['basicDeails'].controls['resume'].setValue(
+  //           fileId
+  //         );
+  //         this.message.create('success', 'File uploaded successfully!');
+  //       });
+  //   }
+
+  //   if (value.type == 'removed') {
+  //     this.dynamicForm.controls['basicDeails'].controls['resume'].setValue(
+  //       null
+  //     );
+  //   }
+  // }
 
   convertToBase64(file: any) {
     return new Promise((resolve, reject) => {
