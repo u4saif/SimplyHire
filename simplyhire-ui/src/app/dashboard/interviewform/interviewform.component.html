@@ -71,8 +71,8 @@
             <nz-form-label nzRequired [nzSm]="3" nzFor="interviewDate">Resume</nz-form-label>
             <nz-form-control>
                 <nz-upload nzType="drag"  [nzFileType]="'application/pdf'" [nzAccept]="'.pdf'"
-                    nzAction="http://localhost:5000/api/v1/resume/new-upload"
-                    (nzChange)="handleChange($event)"
+                    nzAction="http://localhost:5000/api/v1/resume/uploadWithMulter"
+                     
                     [nzDisabled]="this.dynamicForm.controls['basicDeails'].controls['resume'].value"
                     >
                     <p class="ant-upload-drag-icon">
