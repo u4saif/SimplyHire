@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
   getData() {
     this.InterviewService.get('dashboard/interviews').subscribe((resp: any) => {
       this.data = resp.allInterviews;
-      console.log(resp);
     });
   }
 }
