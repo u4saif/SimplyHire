@@ -98,7 +98,7 @@ export class InterviewScoreComponent implements OnInit {
     this.InterviewService.get(`resume/uploaded/${resumeID}`).subscribe({
       next: (value: any) => {
         this.resumeBase64Data = value.resume[0];
-        console.log('----', this.resumeBase64Data.fileData);
+        this.resumeBase64Data = 'data:' + this.resumeBase64Data.fileData.contentType + ';base64,' + btoa(String.fromCharCode(...new Uint8Array(this.resumeBase64Data.fileData.data.data)))
       },
     });
   }

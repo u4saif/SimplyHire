@@ -22,7 +22,7 @@
             </ul>
             <strong>{{item.basicDeails.name}}</strong>
             <p>{{item.basicDeails.qualification | uppercase}} | {{item.basicDeails.email}} | {{item.basicDeails.mobile}} </p>
-            <p>{{item.jobDiscription.purpouse}}</p> 
+            <p>{{item.jobDiscription.purpouse | trimString: '135'}}</p> 
             <ng-container  *ngFor="let skill of item.basicDeails.skills;index as i">
               <ng-container *ngIf="i != 0">| </ng-container> 
               <span nz-icon nzType="tags" nzTheme="twotone"></span>
