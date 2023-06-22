@@ -13,6 +13,7 @@ import { InterviewService } from 'src/app/services/dashboard/interview.service';
 import { interviewBasicDetails } from 'src/app/models/interviewScores.model';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Constants } from 'src/app/models/constants';
+import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-interview-score',
   templateUrl: './interview-score.component.html',
@@ -30,6 +31,7 @@ export class InterviewScoreComponent implements OnInit {
   tooltipEmoji = ['🥵', '🥵', '🥺', '😊', '😎'];
   isLoading: boolean = true;
   scoreCardForm!: FormGroup;
+  resume: any;
   constructor(
     private InterviewService: InterviewService,
     private route: ActivatedRoute,
@@ -97,6 +99,7 @@ export class InterviewScoreComponent implements OnInit {
   getResumeData(resumeID: any) {
     this.InterviewService.get(`resume/uploaded/${resumeID}`).subscribe({
       next: (value: any) => {
+        this.resume = value.resume[0];
         this.resumeBase64Data = value.resume[0];
         this.resumeBase64Data = 'data:' + this.resumeBase64Data.fileData.contentType + ';base64,' + btoa(String.fromCharCode(...new Uint8Array(this.resumeBase64Data.fileData.data.data)))
       },
@@ -138,5 +141,16 @@ export class InterviewScoreComponent implements OnInit {
         this.message.create('error', 'Some Error Occured :(');
       },
     });
+  }
+
+  /**
+   * Download Resume
+   */
+
+  downloadResume(){
+    console.log(this.resume.fileData.data);
+    const fileName = this.resume.name.split("_")[1];
+    const blob = new Blob([new Uint8Array(this.resume.fileData.data.data)]);
+    saveAs(blob,fileName);
   }
 }

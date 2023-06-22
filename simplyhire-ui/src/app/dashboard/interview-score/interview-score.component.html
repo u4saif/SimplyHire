@@ -96,7 +96,7 @@
                     <div class="headerContainer">
                         <h4 nz-typography> <strong>Candidate's Resume</strong>
                         </h4>
-                        <button nz-button nzType="dashed" nzSize="large" style="margin-right: 1em;">Download</button>
+                        <button nz-button nzType="dashed" nzSize="large" style="margin-right: 1em;" (click)="downloadResume()">Download</button>
                     </div>
                      <div id="outerContainer" *ngIf="resumeBase64Data">
                         <div class="pdf-container">
